@@ -1,0 +1,9 @@
+{
+	"name": "chess royale",
+	"version": "0.0.1",
+	"description": "chess royale",
+	"dependacies": {},
+	"scripts": {
+		"start": "node index.js"
+	}
+}
