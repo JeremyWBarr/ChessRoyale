@@ -15,9 +15,10 @@ app.get('/', function(req, res){
 });
 
 var con = mysql.createConnection({
-	host: 		'localhost',
-	user: 		'root',
-	password: 	'pass'
+	host: 			'localhost',
+	user: 			'root',
+	password: 		'pass',
+	insecureAuth:	true
 });
 
 con.connect(function(err) {
