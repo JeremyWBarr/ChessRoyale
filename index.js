@@ -74,13 +74,14 @@ io.on('connection', function(socket){
 });
 
 function checkCredentials(username, password) {
+	var accountFound = false;
 	console.log("credentials: " + username + ", " + password);
 
 	pool.getConnection()
     .then(conn => {
       conn.query("SELECT * FROM user WHERE name = ? and password = ?", [username, password])
 		.then((rows) => {
-			return (rows.length > 0);
+			accountFound = true;
 		})
 		.catch(err => {
 			//handle error
@@ -90,7 +91,8 @@ function checkCredentials(username, password) {
     }).catch(err => {
 			//not connected
 			console.log(err);
-    });
+	});
+	return accountFound;
 }
 
 function addUser(username, password) {
