@@ -7,22 +7,22 @@ var mongoose 		= require('mongoose');
 var MongoStore 		= require('connect-mongo')(session);
 var app 			= express();
 
-mongoose.connect('mongodb://localhost/ManualAuth');
+/*mongoose.connect('mongodb://localhost/ManualAuth');
 
 // Mongoose connection
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-});
+});*/
 
 // Session storage
 app.use(session({
   secret: 'work hard',
   resave: true,
-  saveUninitialized: false,
+  saveUninitialized: false/*,
   store: new MongoStore({
     mongooseConnection: db
-  })
+  })*/
 }));
 
 // Setup views
