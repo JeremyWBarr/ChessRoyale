@@ -1,13 +1,12 @@
 // IMPORTS
-var express 	= require('express');
-var path 		= require('path');
-var http        = require('http').createServer(app);
-var io          = require('socket.io')(http);
-var app 		= express();
-var mariadb	    = require('mariadb');
-var Lobby       = require('lobby');
+var express		= require('express');
+var path		= require('path');
+var http		= require('http').createServer(app);
+var io			= require('socket.io')(http);
+var app			= express();
+var mariadb		= require('mariadb');
 
-var lobbies     = [];
+var lobbies		= [];
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -180,6 +179,14 @@ io.on('connection', function(socket){
 			io.emit('updateLobbies', lobbies);
 		}
 });
+
+// LOBBY OBJECT
+class Lobby {
+    constructor(i, n) {
+        this.id = i;
+        this.name = n;
+    }
+}
 
 // LISTEN TO PORT
 http.listen(80, function(){
