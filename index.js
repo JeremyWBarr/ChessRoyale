@@ -35,19 +35,19 @@ app.get('/login', function(req, res){
 });
 
 app.post('/auth', function(req, res) {
-	var username = request.body.username;
-	var password = request.body.password;
+	var username = req.body.username;
+	var password = req.body.password;
 
 	if(username && password) {
 		if(checkCredentials(username, password)) {
-			request.session.loggedin = true;
-			request.session.username = username;
+			req.session.loggedin = true;
+			req.session.username = username;
 
 			res.redirect('/');
 		} else {
-			response.send('Incorrect Username and/or Password!');
+			res.send('Incorrect Username and/or Password!');
 		}
-		response.end();
+		res.end();
 	} else {
 		res.send('Please enter Username and Password!');
 		res.end();
