@@ -20,8 +20,8 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res){
-	console.log(request.session.loggedin);
-	if(request.session.loggedin) {
+	console.log(req.session.loggedin);
+	if(req.session.loggedin) {
 		res.redirect('index.html');
 	} else {
 		res.redirect('login.html');
@@ -86,28 +86,6 @@ io.on('connection', function(socket){
 		console.log('A user disconnected.');
 	});
 });
-
-function checkCredentials(username, password) {
-	var accountFound = false;
-	console.log("credentials: " + username + ", " + password);
-
-	pool.getConnection()
-    .then(conn => {
-      conn.query("SELECT * FROM user WHERE name = ? and password = ?", [username, password])
-		.then((rows) => {
-			accountFound = true;
-		})
-		.catch(err => {
-			//handle error
-			console.log(err);
-			conn.end();
-		})
-    }).catch(err => {
-			//not connected
-			console.log(err);
-	});
-	return accountFound;
-}
 
 function addUser(username, password) {
 	pool.getConnection()
