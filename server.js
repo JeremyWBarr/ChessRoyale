@@ -7,7 +7,7 @@ var mongoose 		= require('mongoose');
 var MongoStore 		= require('connect-mongo')(session);
 var app 			= express();
 
-mongoose.connect('mongodb://localhost/ManualAuth', { useMongoClient: true });
+mongoose.connect('mongodb://localhost/ManualAuth');
 
 // Mongoose connection
 var db = mongoose.connection;
