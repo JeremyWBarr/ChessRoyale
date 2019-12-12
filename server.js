@@ -70,6 +70,7 @@ io.on('connection', function(socket){
 
 		// LOGIN
 		socket.on('login', function(u, p){
+			console.log('here'+u+" "+p);
 			if(u && p) { 
 				pool.getConnection()
 					.then(conn => {

@@ -47,7 +47,7 @@ socket.emit('getLobbies');
         } else if(view == 'LOBBY') {
             getLobby();
         }
-        
+
         showView(view);
     });
 
@@ -126,6 +126,7 @@ socket.emit('getLobbies');
 
 // FUNCTIONS
 function showView(v) {
+    console.log("switching to view: " + v);
     view = v.toLowerCase();
     $('.view').css('visibility', 'hidden');
     $('#'+view+'View').css('visibility', 'visible');
