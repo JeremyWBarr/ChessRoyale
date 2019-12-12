@@ -61,7 +61,6 @@ app.post('/auth', function(req, res) {
 				//not connected
 				console.log(err);
 		});
-		res.end();
 	} else {
 		res.send('Please enter Username and Password!');
 		res.end();
