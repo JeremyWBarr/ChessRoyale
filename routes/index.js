@@ -45,7 +45,7 @@ router.post('/login', function (req, res, next) {
 router.get('/profile', function (req, res, next) {
 	console.log("profile");
 
-	return res.render('data.html', {"name": User.getUsername(session.userId), "email": "oof"});
+	return res.render('data.html', {"name": User.getUsername(session.userId)});
 });
 
 // 	LOGOUT
