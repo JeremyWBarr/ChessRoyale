@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Chess Royale</title>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+        <script src="https://github.com/processing/p5.js/releases/download/0.9.0/p5.js"></script>
+
+        <script src="main.js"></script>
+    </head>
+
+    <body>
+
+        <!-- LOGIN FORM -->
+        <div id='loginView' class='view' style='visibility: visible;'>
+            <form class='login'>
+                <input type='text' id='loginUsername'       placeholder='Username'/>
+                <input type='text' id='loginPassword'       placeholder='Password'/>
+
+                <input type='submit' value='Login'/>
+            </form>
+        </div>
+
+        <!-- SIGNUP FORM -->
+        <div id='signupView' class='view' style='visibility: hidden;'>
+            <form class='signup'>
+                <input type='text' id='signupUsername'      placeholder='Username'/>
+                <input type='text' id='signupPassword'      placeholder='Password'/>
+                <input type='text' id='signupPasswordCheck' placeholder='Re-enter password'/>
+
+                <input type='submit' value='Sign up'/>
+            </form>
+        </div>
+
+        <!-- HOME PAGE -->
+        <div id='homeView' class='view' style='visibility: hidden;'>
+            <h1>Home</h1>
+            <p class='loggedInAs'>Logged in as: </p>
+
+            <input type='button' class='createLobby' value='Create Lobby'/>
+
+            <h2> Lobby List </h2>
+            <div class='tableContainer'></div>
+        </div>
+
+        <!-- LOBBY PAGE -->
+        <div id='lobbyView' class='view' style='visibility: hidden;'>
+        </div>
+
+        <!-- <script src="sketch.js"></script> -->
+
+    </body>
+</html>
