@@ -3,12 +3,27 @@ var app		= express();
 var path	= require('path');
 var http	= require('http').createServer(app);
 var io		= require('socket.io')(http);
+var mysql	= require('mysql');
+
+var isconnected = false;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res){
-	res.redirect('index.html');
+	//res.redirect('index.html');
+	res.send(isconnected ? "YES" : "NO");
 });
+
+var con = mysql.createConnection({
+	host: 		'localhost',
+	user: 		'root',
+	password: 	'Patriots19'
+});
+
+con.connect(function(err) {
+	if (err) throw err;
+	isconnected = true;
+  });
 
 io.on('connection', function(socket){
 
