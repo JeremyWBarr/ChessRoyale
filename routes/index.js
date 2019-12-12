@@ -34,7 +34,7 @@ router.post('/login', function (req, res, next) {
 
 	var check = User.checkLogin(req.body.username, req.body.password);
 
-	console.log(check);
+	console.log("HERE");
 
 	if(check["isSuccess"]) {
 		req.session.userId = check["userId"];
