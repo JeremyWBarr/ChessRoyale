@@ -17,7 +17,7 @@ app.get('/', function(req, res){
 var con = mysql.createConnection({
 	host: 		'localhost',
 	user: 		'root',
-	password: 	'Patriots19'
+	password: 	'pass'
 });
 
 con.connect(function(err) {
