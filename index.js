@@ -25,21 +25,17 @@ pool.getConnection()
     .then(conn => {
       conn.query("SELECT * from user")
         .then((rows) => {
-		  console.log(rows);
-		  conn.end();
+          console.log(rows);
         })
         .catch(err => {
-          //handle error
+		  //handle error
+		  console.log(err);
           conn.end();
         })
     }).catch(err => {
-      //not connected
+	  //not connected
+	  console.log(err);
     });
-
-con.connect(function(err) {
-	if (err) throw err;
-	isconnected = true;
-  });
 
 io.on('connection', function(socket){
 
