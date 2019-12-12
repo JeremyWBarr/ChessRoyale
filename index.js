@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res){
+	console.log(request.session.loggedin);
 	if(request.session.loggedin) {
 		res.redirect('index.html');
 	} else {
