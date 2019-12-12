@@ -1,5 +1,6 @@
 var express	= require('express');
 var session = require('express-session');
+var engines = require('consolidate');
 var bodyParser = require('body-parser');
 var app		= express();
 var path	= require('path');
@@ -8,13 +9,13 @@ var io		= require('socket.io')(http);
 var mariadb	= require('mariadb');
 
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.engine('html', engines.mustache);
+app.set('view engine', 'html');
 app.use(session({
 	secret: 'secret',
 	resave: true,
 	saveUninitialized: true
 }));
-
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
