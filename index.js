@@ -43,7 +43,7 @@ app.post('/auth', function(req, res) {
 		.then(conn => {
 		conn.query("SELECT * FROM user WHERE name = ? and password = ?", [username, password])
 			.then((rows) => {
-				if(rows.count > 0) {
+				if(rows.length > 0) {
 					req.session.loggedin = true;
 					req.session.username = username;
 
