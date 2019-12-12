@@ -5,6 +5,7 @@ var bodyParser 		= require('body-parser');
 var ejs 			= require('ejs');
 var mongoose 		= require('mongoose');
 var MongoStore 		= require('connect-mongo')(session);
+var engines 		= require('consolidate');
 var app 			= express();
 
 /*mongoose.connect('mongodb://localhost/ManualAuth');
@@ -27,7 +28,8 @@ app.use(session({
 
 // Setup views
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');	
+app.engine('html', engines.mustache);
+app.set('view engine', 'html');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/views'));
