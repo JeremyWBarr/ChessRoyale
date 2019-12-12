@@ -8,7 +8,7 @@ socket.emit('getLobbies');
 // ==================== FORM SUBMISSIONS ==================== //
 
     // LOGIN
-    $('.login').submit(function(e){
+    $('.login').on('submit', function(e) {
         console.log("HEHEDF");
         socket.emit('login', $('#loginUsername').val(), $('#loginPassword').val());
         
