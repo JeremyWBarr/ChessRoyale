@@ -1,11 +1,11 @@
 // IMPORTS
-var express 		= require('express');
-var path 			  = require('path');
+var express 	= require('express');
+var path 		= require('path');
 var http        = require('http').createServer(app);
 var io          = require('socket.io')(http);
-var app 			  = express();
+var app 		= express();
 var mariadb	    = require('mariadb');
-var Lobby       = require('lobby.js');
+var Lobby       = require('lobby');
 
 var lobbies     = [];
 
