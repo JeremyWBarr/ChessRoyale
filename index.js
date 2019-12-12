@@ -18,7 +18,7 @@ var pool = mariadb.createPool({
 	host: 			'localhost',
 	user: 			'root',
 	password: 		'pass',
-	database:		'user',
+	database:		'chessroyale',
 	connetionLimit: 5
 });
 
