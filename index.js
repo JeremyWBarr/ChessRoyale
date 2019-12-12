@@ -1,5 +1,6 @@
 var express	= require('express');
 var session = require('express-session');
+var bodyParser = require('body-parser');
 var app		= express();
 var path	= require('path');
 var http	= require('http').createServer(app);
@@ -13,6 +14,9 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
+
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
 
 app.get('/', function(req, res){
 	if(request.session.loggedin) {
