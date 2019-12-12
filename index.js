@@ -73,10 +73,13 @@ io.on('connection', function(socket){
 });
 
 function checkCredentials(username, password) {
+	console.log("credentials: " + username + ", " + password);
+
 	pool.getConnection()
     .then(conn => {
       conn.query("SELECT * FROM user WHERE name = ? and password = ?", [username, password])
 		.then((rows) => {
+			console.log(rows);
 			if(rows.length > 0)
 				return true;
 			return false;
