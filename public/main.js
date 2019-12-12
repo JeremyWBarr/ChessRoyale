@@ -9,18 +9,18 @@ socket.emit('getLobbies');
 
     // LOGIN
     $('.login').submit(function(e){
-        e.preventDefault();
         console.log("HEHEDF");
         socket.emit('login', $('#loginUsername').val(), $('#loginPassword').val());
-
+        
+        e.preventDefault();
         return false;
     });
 
     // SIGNUP
     $('.signup').submit(function(e){
-        e.preventDefault();
         socket.emit('signup', $('#signupUsername').val(), $('#signupPassword').val(),$('#signupPasswordCheck').val(), );
-
+        
+        e.preventDefault();
         return false;
     });
 
