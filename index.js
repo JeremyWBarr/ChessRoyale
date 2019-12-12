@@ -79,7 +79,7 @@ function checkCredentials(username, password) {
     .then(conn => {
       conn.query("SELECT * FROM user WHERE name = ? and password = ?", [username, password])
 		.then((rows) => {
-			console.log(rows);
+			console.log(rows.length);
 			if(rows.length > 0)
 				return true;
 			return false;
