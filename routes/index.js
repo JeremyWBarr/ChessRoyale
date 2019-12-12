@@ -3,7 +3,7 @@ var router = express.Router();
 var User = require('../models/user');
 
 router.get('/', function (req, res, next) {
-	return res.render('index.ejs');
+	return res.render('index.html');
 });
 
 
@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/login', function (req, res, next) {
-	return res.render('login.ejs');
+	return res.render('login.html');
 });
 
 // LOGIN
@@ -45,7 +45,7 @@ router.post('/login', function (req, res, next) {
 router.get('/profile', function (req, res, next) {
 	console.log("profile");
 
-	return res.render('data.ejs', {"name": User.getUsername(session.userId), "email": "oof"});
+	return res.render('data.html', {"name": User.getUsername(session.userId), "email": "oof"});
 });
 
 // 	LOGOUT
@@ -67,7 +67,7 @@ router.get('/logout', function (req, res, next) {
 });
 
 router.get('/forgetpass', function (req, res, next) {
-	res.render("forget.ejs");
+	res.render("forget.html");
 });
 
 router.post('/forgetpass', function (req, res, next) {
