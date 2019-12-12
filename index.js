@@ -18,6 +18,7 @@ var pool = mariadb.createPool({
 	host: 			'localhost',
 	user: 			'root',
 	password: 		'pass',
+	database:		'user',
 	connetionLimit: 5
 });
 
