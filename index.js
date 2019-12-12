@@ -8,7 +8,7 @@ var http	= require('http').createServer(app);
 var io		= require('socket.io')(http);
 var mariadb	= require('mariadb');
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'views')));
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 app.use(session({
