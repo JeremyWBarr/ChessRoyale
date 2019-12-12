@@ -7,6 +7,7 @@ socket.emit('getLobbies');
 
 // ==================== FORM SUBMISSIONS ==================== //
 
+$(function() {
     // LOGIN
     $('.login').click(function(e) {
         console.log("HEHEDF");
@@ -20,6 +21,7 @@ socket.emit('getLobbies');
         e.preventDefault();
         return false;
     });
+});
 
 // ==================== SOCKET INBOUND EVENTS ==================== //
 
