@@ -3,7 +3,7 @@ var app		= express();
 var path	= require('path');
 var http	= require('http').createServer(app);
 var io		= require('socket.io')(http);
-var mysql	= require('mysql');
+var mariadb	= require('mariadb');
 
 var isconnected = false;
 
@@ -14,12 +14,27 @@ app.get('/', function(req, res){
 	res.send(isconnected ? "YES" : "NO");
 });
 
-var con = mysql.createConnection({
+var pool = mariadb.createPool({
 	host: 			'localhost',
 	user: 			'root',
 	password: 		'pass',
-	insecureAuth:	true
+	connetionLimit: 5
 });
+
+pool.getConnection()
+    .then(conn => {
+      conn.query("SELECT * from user")
+        .then((rows) => {
+		  console.log(rows);
+		  conn.end();
+        })
+        .catch(err => {
+          //handle error
+          conn.end();
+        })
+    }).catch(err => {
+      //not connected
+    });
 
 con.connect(function(err) {
 	if (err) throw err;
