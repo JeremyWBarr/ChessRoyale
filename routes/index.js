@@ -18,7 +18,7 @@ router.post('/', function(req, res, next) {
 		if (personInfo.password == personInfo.passwordConf) {
 
 			User.addUser(personInfo.username, personInfo.password);
-
+			res.send({"Success":"Account regestered. Login to proceed."});
 		}else{
 			res.send({"Success":"Passwords no not match."});
 		}
