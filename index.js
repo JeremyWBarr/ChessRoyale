@@ -39,6 +39,7 @@ app.post('/auth', function(req, res) {
 	var password = req.body.password;
 
 	if(username && password) {
+		console.log(checkCredentials(username, password));
 		if(checkCredentials(username, password)) {
 			req.session.loggedin = true;
 			req.session.username = username;
@@ -79,7 +80,6 @@ function checkCredentials(username, password) {
     .then(conn => {
       conn.query("SELECT * FROM user WHERE name = ? and password = ?", [username, password])
 		.then((rows) => {
-			console.log(rows.length > 0);
 			return (rows.length > 0);
 		})
 		.catch(err => {
