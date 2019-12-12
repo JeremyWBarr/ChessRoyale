@@ -47,7 +47,7 @@ app.post('/auth', function(req, res) {
 					req.session.loggedin = true;
 					req.session.username = username;
 
-					res.render('', {username: req.session.username});
+					res.render('index.html', {username: req.session.username});
 				} else {
 					res.send('Incorrect Username and/or Password!');
 				}
