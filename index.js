@@ -39,15 +39,28 @@ app.post('/auth', function(req, res) {
 	var password = req.body.password;
 
 	if(username && password) {
-		console.log(checkCredentials(username, password));
-		if(checkCredentials(username, password)) {
-			req.session.loggedin = true;
-			req.session.username = username;
+		pool.getConnection()
+		.then(conn => {
+		conn.query("SELECT * FROM user WHERE name = ? and password = ?", [username, password])
+			.then((rows) => {
+				if(rows.count > 0) {
+					req.session.loggedin = true;
+					req.session.username = username;
 
-			res.redirect('/');
-		} else {
-			res.send('Incorrect Username and/or Password!');
-		}
+					res.redirect('/');
+				} else {
+					res.send('Incorrect Username and/or Password!');
+				}
+			})
+			.catch(err => {
+				//handle error
+				console.log(err);
+				conn.end();
+			})
+		}).catch(err => {
+				//not connected
+				console.log(err);
+		});
 		res.end();
 	} else {
 		res.send('Please enter Username and Password!');
