@@ -10,6 +10,7 @@ socket.emit('getLobbies');
     // LOGIN
     $('.login').submit(function(e){
         e.preventDefault();
+        console.log("HEHEDF");
         socket.emit('login', $('#loginUsername').val(), $('#loginPassword').val());
 
         return false;
