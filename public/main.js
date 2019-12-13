@@ -162,8 +162,6 @@ function showView(v) {
 }
 
 function updateMembers(memberlist) {
-    console.log(memberlist);
-        
     // CLEAR OLD LOBBIES TABLE
     var oldTable = document.getElementsByClassName('memberTable');
     if(oldTable.length > 0)
