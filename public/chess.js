@@ -107,7 +107,7 @@ function Tile(x, y, s, c) {
         var xpos = this.x * size - (xoff * zoom);
         var ypos = this.y * size - (yoff * zoom);
         rect(xpos, ypos, size, size);
-=
+
         if(this.p != null) this.p.draw(this.x, this.y);
     }
 }
