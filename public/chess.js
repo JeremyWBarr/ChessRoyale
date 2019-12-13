@@ -228,15 +228,16 @@ function mouseClicked() {
     if(selectedTile.p != null) {
         selectedTile.p.getAvailableMoves().forEach(function(moveset){
             console.log(moveset);
-            moveset.forEach(function(move){
+            var deadEnd = false;
+            moveset.forEach(function(move) {
                 if( (selectedTile.x + move[0]) >= 0 && (selectedTile.x + move[0]) < board.tiles.length &&
-                    (selectedTile.y + move[1]) >= 0 && (selectedTile.y + move[1]) < board.tiles[0].length) {
+                    (selectedTile.y + move[1]) >= 0 && (selectedTile.y + move[1]) < board.tiles[0].length && !deadEnd) {
                         console.log(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
                         if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p == null) {
                             availableTiles.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
                         } else {
                             // TODO: add enemy piecies
-                            return;
+                            deadEnd = true;
                         }
                     }
             });
