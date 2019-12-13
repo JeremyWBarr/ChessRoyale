@@ -106,6 +106,7 @@ $(function() {
 
             if(i < lobbylist.length) {
                 link.innerHTML          = lobbylist[i].name;
+                link.href               = '#'
                 link.name               = lobbylist[i].id;
                 link.className          = 'joinLobby';
             } else {
