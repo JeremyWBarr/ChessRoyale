@@ -75,14 +75,26 @@ a {
     transform: translate(-50%, -50%);
     
     text-align: center;
-    padding-top: 100px;
+    padding-top: 30px;
 
     color:  rgb(186, 237, 255);
+}
+
+#homeView p, #lobbyView p {
+    margin: 0;
 }
 
 #homeView h1, #lobbyView h1 {
     color: white;
     margin: 0;
+}
+
+#homeView input[type=button], #lobbyView input[type=button] {
+    width: 30%;
+    height: 40px;
+    margin-top: 50px;
+    font-size: 120%;
+    border-radius: 10px;
 }
 
 /* HOME TABLE */
