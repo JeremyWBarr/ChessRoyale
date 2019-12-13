@@ -18,7 +18,7 @@ var     bPawn,      wPawn,
         bKing,      wKing;
 
 // P5 PRELOAD
-function preload() {
+/*function preload() {
     Pawn   = loadImage('assets/Black_Pawn.png');
     wPawn   = loadImage('assets/White_Pawn.png');
     bKnight = loadImage('assets/Black_Knight.png');
@@ -31,14 +31,14 @@ function preload() {
     wQueen  = loadImage('assets/White_Queen.png');
     bKing   = loadImage('assets/Black_King.png');
     wKing   = loadImage('assets/White_King.png');
-}
+}*/
 
 // P5 SETUP
 function setup() {
     createCanvas(720, 720);
 
     board.init();
-    board[0][23].p = new Piece("P", color(255,0,0));
+    //board[0][23].p = new Piece("P", color(255,0,0));
 }
 
 // P5 DRAW
