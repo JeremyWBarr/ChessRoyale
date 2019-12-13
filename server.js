@@ -192,7 +192,7 @@ io.on('connection', function(socket){
 		function updateMembers(id) {
 			lobbies.forEach(function(lobby){
 				console.log(lobby);
-				console.log('in room: ' + io.sockets.clients(id));
+				console.log(io.sockets.clients(id));
 				if(lobby.id == id) io.to(id).emit('getMembersCallback', lobby.members);
 			});
 		}
