@@ -10,12 +10,13 @@ var lobbies		= [];
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// MYSQL CONNECTION
+// MYSQL CONNECTION 3307
 var pool = mariadb.createPool({
 	host: 			'localhost',
 	user: 			'root',
 	password: 		'pass',
 	database:		'chessroyale',
+	port:			3307,
 	connetionLimit: 5
 });
 
@@ -171,6 +172,27 @@ io.on('connection', function(socket){
 			updateMembers(id);
 		});
 
+		// BOARD UPDATE
+		socket.on('boardUpdate', function(board) {
+			lobbies.forEach(function(lobby){
+				if(lobby.id == room) {
+					lobby.turn++;
+					if(lobby.turn > 3) lobby.turn = 0;
+					socket.to(room).emit('getTurnCallback', lobby.turn);
+				}
+			});
+			socket.broadcast.to(room).emit('boardUpdate', board);
+		});
+
+		// GET TURN
+		socket.on('getTurn', function(){
+			lobbies.forEach(function(lobby){
+				if(lobby.id == room) {
+					io.to(room).emit('getTurnCallback', lobby.turn);
+				}
+			});
+		});
+
 	// ==================== SOCKET OUTBOUND EVENTS ==================== //
 
 		// SEND ERROR
@@ -209,6 +231,7 @@ class Lobby {
         this.id = i;
 		this.name = n;
 		this.members = m;
+		this.turn = 0;
     }
 }
 

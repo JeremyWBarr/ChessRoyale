@@ -2,6 +2,11 @@ var socket      = io();
 var user        = '';
 var lobbyId     = '';
 var lobbyName   = '';
+var userColor   = 0;
+var turn        = 0;
+var list        = [];
+
+var gameStarted = false;
             
 socket.emit('getLobbies');
 
@@ -40,9 +45,10 @@ $(function() {
 
     // RECIEVE MESSAGE
     socket.on('message', function(type, message){
+
         if(type == "ERR") {
 
-            console.log("ERROR: " + message);
+            alert('ERROR: '+ message);
 
         } else if(type == "MSG") {
 
@@ -57,6 +63,7 @@ $(function() {
             getUsername();
         } else if(view == 'LOBBY') {
             getLobby();
+            getTurn();
         }
 
         showView(view);
@@ -65,7 +72,7 @@ $(function() {
     // GET USERNAME CALLBACK
     socket.on('getUsernameCallback', function(username){
         user = username;
-        $('.loggedInAs').html('Logged in as: '+username + '! (<a href=# class=switchLogin>logout</a>)');
+        $('.loggedInAs').html('Logged in as: '+username + '! (<a href=javascript:showView("LOGIN")>logout</a>)');
     });
 
     // GET LOBBY CALLBACK
@@ -74,8 +81,28 @@ $(function() {
 
         lobbyId     = lobby.id;
         lobbyName   = lobby.name;
+        userColor   = lobby.members.indexOf(user);
 
-        $('.lobbyName').html("Welcome to " + lobby.name + "'s Lobby");
+        switch(userColor) {
+            case 0:
+                $('#lobbyView').css('border', '5px solid #F00');
+                $('#lobbyView').css('box-shadow', '0 0 15px #F00');
+            break;
+            case 1:
+                $('#lobbyView').css('border', '5px solid #00F');
+                $('#lobbyView').css('box-shadow', '0 0 15px #00F');
+            break;
+            case 2:
+                $('#lobbyView').css('border', '5px solid #0F0');
+                $('#lobbyView').css('box-shadow', '0 0 15px #0F0');
+            break;
+            case 3:
+                $('#lobbyView').css('border', '5px solid #FF0');
+                $('#lobbyView').css('box-shadow', '0 0 15px #FF0');
+            break;
+        }
+
+        $('.lobbyName').html("Welcome to " + lobby.name);
 
         updateMembers(lobby.members);
     });
@@ -126,6 +153,25 @@ $(function() {
         updateMembers(memberlist);
     });
 
+    // GET TURN CALLBACK
+    socket.on('getTurnCallback', function(t){
+        turn = t;
+        $('.playerTurn').html(list[t] + "'s Turn");
+        switch(t){
+            case 0:
+            $('.playerTurn').css('color', '#F00');
+            break;
+            case 1:
+            $('.playerTurn').css('color','#00F' );
+            break;
+            case 2:
+            $('.playerTurn').css('color', '#0F0');
+            break;
+            case 3:
+            $('.playerTurn').css('color', '#FF0');
+        }
+    });
+
 // ==================== SOCKET OUTBOUND EVENTS ==================== //
 
     // GET USERNAME
@@ -153,6 +199,11 @@ $(function() {
         socket.emit('joinLobby', id);
     }
 
+    // GET TURN
+    function getTurn() {
+        socket.emit('getTurn');
+    }
+
 // FUNCTIONS
 function showView(v) {
     console.log("switching to view: " + v);
@@ -162,6 +213,10 @@ function showView(v) {
 }
 
 function updateMembers(memberlist) {
+    list = memberlist;
+
+    if(memberlist.length == 4) gameStarted = true;
+
     // CLEAR OLD LOBBIES TABLE
     var oldTable = document.getElementsByClassName('memberTable');
     if(oldTable.length > 0)
@@ -183,6 +238,21 @@ function updateMembers(memberlist) {
         var cell                = document.createElement("td");
         
         var link                = document.createElement("a");
+
+        switch(i) {
+            case 0:
+            link.style.cssText='color:#F00;font-weight:bold;font-size:150%';
+            break;
+            case 1:
+            link.style.cssText='color:#00F;font-weight:bold;font-size:150%';
+            break;
+            case 2:
+            link.style.cssText='color:#0F0;font-weight:bold;font-size:150%';
+            break;
+            case 3:
+            link.style.cssText='color:#FF0;font-weight:bold;font-size:150%';
+            break;
+        }
 
         if(i < memberlist.length) {
             link.innerHTML          = memberlist[i];

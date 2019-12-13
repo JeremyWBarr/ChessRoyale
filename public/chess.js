@@ -46,8 +46,12 @@ function setup() {
 
 // P5 DRAW
 function draw() {
-    background(51);
+    background('#2C2F33');
     board.draw();
+    if(!gameStarted) {
+        fill(51, 51, 51, 50);
+        rect(0, 0, canvasWidth, canvasWidth);
+    }
 }
 
 
@@ -67,72 +71,72 @@ function Board(w, h, s) {
             this.tiles[x] = row;
         }
         // RED TEAM
-        this.tiles[0][0].p = new Piece('K',     color(255,0,0),     canvasWidth / 24);
-        this.tiles[1][1].p = new Piece('Q',    color(255,0,0),     canvasWidth / 24);
-        this.tiles[0][1].p = new Piece('R',     color(255,0,0),     canvasWidth / 24);
-        this.tiles[1][0].p = new Piece('R',     color(255,0,0),     canvasWidth / 24);
-        this.tiles[0][2].p = new Piece('N',    color(255,0,0),     canvasWidth / 24);
-        this.tiles[2][0].p = new Piece('N',    color(255,0,0),     canvasWidth / 24);
-        this.tiles[0][3].p = new Piece('B',    color(255,0,0),     canvasWidth / 24);
-        this.tiles[3][0].p = new Piece('B',    color(255,0,0),     canvasWidth / 24);
-        this.tiles[4][0].p = new Piece('P',     color(255,0,0),     canvasWidth / 24);
-        this.tiles[3][1].p = new Piece('P',     color(255,0,0),     canvasWidth / 24);
-        this.tiles[2][1].p = new Piece('P',     color(255,0,0),     canvasWidth / 24);
-        this.tiles[1][2].p = new Piece('P',     color(255,0,0),     canvasWidth / 24);
-        this.tiles[1][3].p = new Piece('P',     color(255,0,0),     canvasWidth / 24);
-        this.tiles[0][4].p = new Piece('P',     color(255,0,0),     canvasWidth / 24);
+        this.tiles[0][0].p = new Piece('K',     0,     canvasWidth / 24);
+        this.tiles[1][1].p = new Piece('Q',     0,     canvasWidth / 24);
+        this.tiles[0][1].p = new Piece('R',     0,     canvasWidth / 24);
+        this.tiles[1][0].p = new Piece('R',     0,     canvasWidth / 24);
+        this.tiles[0][2].p = new Piece('N',     0,     canvasWidth / 24);
+        this.tiles[2][0].p = new Piece('N',     0,     canvasWidth / 24);
+        this.tiles[0][3].p = new Piece('B',     0,     canvasWidth / 24);
+        this.tiles[3][0].p = new Piece('B',     0,     canvasWidth / 24);
+        this.tiles[4][0].p = new Piece('P',     0,     canvasWidth / 24);
+        this.tiles[3][1].p = new Piece('P',     0,     canvasWidth / 24);
+        this.tiles[2][1].p = new Piece('P',     0,     canvasWidth / 24);
+        this.tiles[1][2].p = new Piece('P',     0,     canvasWidth / 24);
+        this.tiles[1][3].p = new Piece('P',     0,     canvasWidth / 24);
+        this.tiles[0][4].p = new Piece('P',     0,     canvasWidth / 24);
 
         // BLUE TEAM
-        this.tiles[23][0].p = new Piece('K',    color(0,0,255),     canvasWidth / 24);
-        this.tiles[22][1].p = new Piece('Q',    color(0,0,255),     canvasWidth / 24);
-        this.tiles[23][1].p = new Piece('R',    color(0,0,255),     canvasWidth / 24);
-        this.tiles[22][0].p = new Piece('R',    color(0,0,255),     canvasWidth / 24);
-        this.tiles[23][2].p = new Piece('N',    color(0,0,255),     canvasWidth / 24);
-        this.tiles[21][0].p = new Piece('N',    color(0,0,255),     canvasWidth / 24);
-        this.tiles[23][3].p = new Piece('B',    color(0,0,255),     canvasWidth / 24);
-        this.tiles[20][0].p = new Piece('B',    color(0,0,255),     canvasWidth / 24);
-        this.tiles[19][0].p = new Piece('P',    color(0,0,255),     canvasWidth / 24);
-        this.tiles[20][1].p = new Piece('P',    color(0,0,255),     canvasWidth / 24);
-        this.tiles[21][1].p = new Piece('P',    color(0,0,255),     canvasWidth / 24);
-        this.tiles[22][2].p = new Piece('P',    color(0,0,255),     canvasWidth / 24);
-        this.tiles[22][3].p = new Piece('P',    color(0,0,255),     canvasWidth / 24);
-        this.tiles[23][4].p = new Piece('P',    color(0,0,255),     canvasWidth / 24);
+        this.tiles[23][0].p = new Piece('K',    1,     canvasWidth / 24);
+        this.tiles[22][1].p = new Piece('Q',    1,     canvasWidth / 24);
+        this.tiles[23][1].p = new Piece('R',    1,     canvasWidth / 24);
+        this.tiles[22][0].p = new Piece('R',    1,     canvasWidth / 24);
+        this.tiles[23][2].p = new Piece('N',    1,     canvasWidth / 24);
+        this.tiles[21][0].p = new Piece('N',    1,     canvasWidth / 24);
+        this.tiles[23][3].p = new Piece('B',    1,     canvasWidth / 24);
+        this.tiles[20][0].p = new Piece('B',    1,     canvasWidth / 24);
+        this.tiles[19][0].p = new Piece('P',    1,     canvasWidth / 24);
+        this.tiles[20][1].p = new Piece('P',    1,     canvasWidth / 24);
+        this.tiles[21][1].p = new Piece('P',    1,     canvasWidth / 24);
+        this.tiles[22][2].p = new Piece('P',    1,     canvasWidth / 24);
+        this.tiles[22][3].p = new Piece('P',    1,     canvasWidth / 24);
+        this.tiles[23][4].p = new Piece('P',    1,     canvasWidth / 24);
 
         // GREEN TEAM
-        this.tiles[23][23].p = new Piece('K',   color(0,255,0),     canvasWidth / 24);
-        this.tiles[22][22].p = new Piece('Q',   color(0,255,0),     canvasWidth / 24);
-        this.tiles[23][22].p = new Piece('R',   color(0,255,0),     canvasWidth / 24);
-        this.tiles[22][23].p = new Piece('R',   color(0,255,0),     canvasWidth / 24);
-        this.tiles[23][21].p = new Piece('N',   color(0,255,0),     canvasWidth / 24);
-        this.tiles[21][23].p = new Piece('N',   color(0,255,0),     canvasWidth / 24);
-        this.tiles[23][20].p = new Piece('B',   color(0,255,0),     canvasWidth / 24);
-        this.tiles[20][23].p = new Piece('B',   color(0,255,0),     canvasWidth / 24);
-        this.tiles[19][23].p = new Piece('P',   color(0,255,0),     canvasWidth / 24);
-        this.tiles[20][22].p = new Piece('P',   color(0,255,0),     canvasWidth / 24);
-        this.tiles[21][22].p = new Piece('P',   color(0,255,0),     canvasWidth / 24);
-        this.tiles[22][21].p = new Piece('P',   color(0,255,0),     canvasWidth / 24);
-        this.tiles[22][20].p = new Piece('P',   color(0,255,0),     canvasWidth / 24);
-        this.tiles[23][19].p = new Piece('P',   color(0,255,0),     canvasWidth / 24);
+        this.tiles[23][23].p = new Piece('K',   2,     canvasWidth / 24);
+        this.tiles[22][22].p = new Piece('Q',   2,     canvasWidth / 24);
+        this.tiles[23][22].p = new Piece('R',   2,     canvasWidth / 24);
+        this.tiles[22][23].p = new Piece('R',   2,     canvasWidth / 24);
+        this.tiles[23][21].p = new Piece('N',   2,     canvasWidth / 24);
+        this.tiles[21][23].p = new Piece('N',   2,     canvasWidth / 24);
+        this.tiles[23][20].p = new Piece('B',   2,     canvasWidth / 24);
+        this.tiles[20][23].p = new Piece('B',   2,     canvasWidth / 24);
+        this.tiles[19][23].p = new Piece('P',   2,     canvasWidth / 24);
+        this.tiles[20][22].p = new Piece('P',   2,     canvasWidth / 24);
+        this.tiles[21][22].p = new Piece('P',   2,     canvasWidth / 24);
+        this.tiles[22][21].p = new Piece('P',   2,     canvasWidth / 24);
+        this.tiles[22][20].p = new Piece('P',   2,     canvasWidth / 24);
+        this.tiles[23][19].p = new Piece('P',   2,     canvasWidth / 24);
 
         // YELLOW TEAM
-        this.tiles[0][23].p = new Piece('K',    color(255,255,0),     canvasWidth / 24);
-        this.tiles[1][22].p = new Piece('Q',    color(255,255,0),     canvasWidth / 24);
-        this.tiles[0][22].p = new Piece('R',    color(255,255,0),     canvasWidth / 24);
-        this.tiles[1][23].p = new Piece('R',    color(255,255,0),     canvasWidth / 24);
-        this.tiles[0][21].p = new Piece('N',    color(255,255,0),     canvasWidth / 24);
-        this.tiles[2][23].p = new Piece('N',    color(255,255,0),     canvasWidth / 24);
-        this.tiles[0][20].p = new Piece('B',    color(255,255,0),     canvasWidth / 24);
-        this.tiles[3][23].p = new Piece('B',    color(255,255,0),     canvasWidth / 24);
-        this.tiles[4][23].p = new Piece('P',    color(255,255,0),     canvasWidth / 24);
-        this.tiles[3][22].p = new Piece('P',    color(255,255,0),     canvasWidth / 24);
-        this.tiles[2][22].p = new Piece('P',    color(255,255,0),     canvasWidth / 24);
-        this.tiles[1][21].p = new Piece('P',    color(255,255,0),     canvasWidth / 24);
-        this.tiles[1][20].p = new Piece('P',    color(255,255,0),     canvasWidth / 24);
-        this.tiles[0][19].p = new Piece('P',    color(255,255,0),     canvasWidth / 24);
+        this.tiles[0][23].p = new Piece('K',    3,     canvasWidth / 24);
+        this.tiles[1][22].p = new Piece('Q',    3,     canvasWidth / 24);
+        this.tiles[0][22].p = new Piece('R',    3,     canvasWidth / 24);
+        this.tiles[1][23].p = new Piece('R',    3,     canvasWidth / 24);
+        this.tiles[0][21].p = new Piece('N',    3,     canvasWidth / 24);
+        this.tiles[2][23].p = new Piece('N',    3,     canvasWidth / 24);
+        this.tiles[0][20].p = new Piece('B',    3,     canvasWidth / 24);
+        this.tiles[3][23].p = new Piece('B',    3,     canvasWidth / 24);
+        this.tiles[4][23].p = new Piece('P',    3,     canvasWidth / 24);
+        this.tiles[3][22].p = new Piece('P',    3,     canvasWidth / 24);
+        this.tiles[2][22].p = new Piece('P',    3,     canvasWidth / 24);
+        this.tiles[1][21].p = new Piece('P',    3,     canvasWidth / 24);
+        this.tiles[1][20].p = new Piece('P',    3,     canvasWidth / 24);
+        this.tiles[0][19].p = new Piece('P',    3,     canvasWidth / 24);
     }
 
     this.draw = function() {
-        if(mouseX > 0 && mouseY > 0 && mouseX < canvasWidth && mouseY < canvasWidth && mouseIsPressed) {
+        if(mouseX > 0 && mouseY > 0 && mouseX < canvasWidth && mouseY < canvasWidth && gameStarted && mouseIsPressed) {
             xoff = startX - mouseX;
             yoff = startY - mouseY;
 
@@ -175,10 +179,24 @@ function Tile(x, y, s, c) {
 }
 
 // PIECE OBJECT
-function Piece(t, c, s) {
+function Piece(t, cv, s) {
     this.t = t;
-    this.c = c;
+    this.cv = cv;
     this.s = s;
+    
+    switch(cv) {
+        case 0:
+        this.c = color(255, 0, 0);
+        break;
+        case 1:
+        this.c = color(0, 0, 255);
+        break;
+        case 2:
+        this.c = color(0, 255, 0);
+        break;
+        case 3:
+        this.c = color(255, 255, 0);
+    }
 
     this.draw = function(x, y) {
         var size = this.s * zoom;
@@ -244,39 +262,44 @@ function Piece(t, c, s) {
 
 // SELECT TILE 
 function mouseClicked() {
-    if(mouseX > 0 && mouseY > 0 && mouseX < canvasWidth && mouseY < canvasWidth) {
+    if(mouseX > 0 && mouseY > 0 && mouseX < canvasWidth && mouseY < canvasWidth && gameStarted) {
         var xIndex = Math.floor((mouseX + (xoff * zoom))/(canvasWidth/24 * zoom));
         var yIndex = Math.floor((mouseY + (yoff * zoom))/(canvasWidth/24 * zoom));
         tempSelectedTile = board.tiles[xIndex][yIndex];
+
+        var movedPiece = false;
 
         if(containsObject(tempSelectedTile, availableTiles)) {
             // MOVE PIECE
             tempSelectedTile.p = selectedTile.p;
             selectedTile.p = null;
             sendBoardState(board);
+            movedPiece = true;
         }
 
         // FIND AVAILABLE TILES
         selectedTile = tempSelectedTile;
         availableTiles = [];
 
-        if(selectedTile.p != null) {
-            selectedTile.p.getAvailableMoves().forEach(function(moveset){
-                console.log(moveset);
-                var deadEnd = false;
-                moveset.forEach(function(move) {
-                    if( (selectedTile.x + move[0]) >= 0 && (selectedTile.x + move[0]) < board.tiles.length &&
-                        (selectedTile.y + move[1]) >= 0 && (selectedTile.y + move[1]) < board.tiles[0].length && !deadEnd) {
-                            console.log(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
-                            if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p == null) {
-                                availableTiles.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
-                            } else {
-                                // TODO: add enemy piecies
-                                deadEnd = true;
+        if(selectedTile.p != null && !movedPiece) {
+            if(selectedTile.p.cv == userColor && turn == userColor) {
+                selectedTile.p.getAvailableMoves().forEach(function(moveset){
+                    console.log(moveset);
+                    var deadEnd = false;
+                    moveset.forEach(function(move) {
+                        if( (selectedTile.x + move[0]) >= 0 && (selectedTile.x + move[0]) < board.tiles.length &&
+                            (selectedTile.y + move[1]) >= 0 && (selectedTile.y + move[1]) < board.tiles[0].length && !deadEnd) {
+                                if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p == null) {
+                                    availableTiles.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
+                                } else {
+                                    if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p.cv != userColor)
+                                        availableTiles.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
+                                    deadEnd = true;
+                                }
                             }
-                        }
+                    });
                 });
-            });
+            }
         }
     }
 }
@@ -291,12 +314,13 @@ function mouseWheel(event) {
 
 // OFFSET
 function mousePressed() {
-    if(mouseX > 0 && mouseY > 0 && mouseX < canvasWidth && mouseY < canvasWidth) {
+    if(mouseX > 0 && mouseY > 0 && mouseX < canvasWidth && mouseY < canvasWidth && gameStarted) {
         startX = mouseX + xoff;
         startY = mouseY + yoff;
     }
 }
 
+// CONTAINS OBJECT
 function containsObject(obj, list) {
     var i;
     for (i = 0; i < list.length; i++) {
@@ -308,16 +332,41 @@ function containsObject(obj, list) {
     return false;
 }
 
-// BOARD STATE
+// ======= BOARD STATE ======= //
 
 // SEND
 function sendBoardState(board) {
-    var jsonBoard = JSON.stringify(board);
-    socket.emit('boardUpdate', jsonBoard);
+    var data = [];
+    board.tiles.forEach(function(tileRow){
+        var dataRow = [];
+        tileRow.forEach(function(tile){
+            if(tile.p != null) {
+                dataRow.push({t: tile.p.t, c: tile.p.cv});
+            } else {
+                dataRow.push(null);
+            }
+        });
+        data.push(dataRow);
+    });
+    socket.emit('boardUpdate', data);
+    socket.emit('getTurn');
 }
 
 //RECIEVE
-socket.on('boardUpdate', function(jsonBoard) {
-    var boardObject = JSON.parse(jsonBoard);
-    board = boardObject;
+socket.on('boardUpdate', function(data) {
+    var tiles = [];
+    data.forEach(function(dataRow, x){
+        var tileRow = [];
+        dataRow.forEach(function(data, y){
+            tile = new Tile(x, y, canvasWidth/24, ((x+y)%2 == 0) ? color('#3a466e') : color('#a2afdb'));
+            if(data != null) {
+                tile.p = new Piece(data.t, data.c, canvasWidth/24);
+            }
+            tileRow.push(tile);
+        });
+        tiles.push(tileRow);
+    });
+
+    board.tiles = tiles;
+    console.log(tiles);
 });
