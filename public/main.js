@@ -36,6 +36,7 @@ $(function() {
 
     // JOIN LOBBY
     $('.joinLobby').click(function() {
+        alert('join Clicked: '+ $(this).attr('name'));
         socket.emit('joinLobby', $(this).attr('name'));
     });
 });
