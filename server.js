@@ -43,7 +43,7 @@ io.on('connection', function(socket){
 		// SIGNUP
 		socket.on('signup', function(u, p, c){
 			hadError = false;
-			if(p == x) {
+			if(p == c) {
 				pool.getConnection()
 					.then(conn => {
 						conn.query("INSERT INTO user value (?, ?)", [username, password])
