@@ -84,7 +84,7 @@ $(function() {
         table.appendChild(headerRow);
 
         // ADD LOBBIES
-        for(var i = 0; i < 20; i++) {
+        for(var i = 0; i < 15; i++) {
             var row                 = document.createElement("tr");
             var cell                = document.createElement("td");
             

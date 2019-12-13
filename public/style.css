@@ -74,9 +74,18 @@ html {
     padding-top: 100px;
 }
 
-#homeView table, #homeView td {
+#homeView table {
+    margin: auto auto;
     width: 60%;
     border: 4px solid white;
+}
+
+#homeView th {
+    border: 4px solid white;
+}
+
+#homeView table, #homeView td {
+    border: 2px solid white;
     border-collapse: collapse;
 }
 
