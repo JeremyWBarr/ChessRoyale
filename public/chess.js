@@ -59,7 +59,7 @@ function Board(w, h, s) {
         for(var x = 0; x < this.width; x++) {
             var row = [];
             for(var y = 0; y < this.height; y++) {
-                row[y] = new Tile(x, y, this.tileSize, ((x+y)%2 == 0) ? color(255) : color(0));
+                row[y] = new Tile(x, y, this.tileSize, ((x+y)%2 == 0) ? color('#3a466e') : color('#a2afdb'));
             }
             this.tiles[x] = row;
         }
