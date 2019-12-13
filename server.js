@@ -130,14 +130,22 @@ io.on('connection', function(socket){
 
 		// JOIN LOBBY
 		socket.on('joinLobby', function(id) {
+			var lobbyFull = false;
 			lobbies.forEach(function(lobby) {
-				if(lobby.id == id) lobby.members.push(username);
+				if(lobby.members >= 4){
+					sendError("Lobby already full!");
+					lobbyFull = true;
+				} else {
+					if(lobby.id == id) lobby.members.push(username);
+				}
 			});
-			room = id;
-			socket.join(id);
+			if(!lobbyFull) {
+				room = id;
+				socket.join(id);
 
-			updateMembers(id);
-			changeView("LOBBY");
+				updateMembers(id);
+				changeView("LOBBY");
+			}
 		});
 
 		// GET USERNAME
@@ -148,7 +156,6 @@ io.on('connection', function(socket){
 		// GET LOBBY
 		socket.on('getLobby', function() {
 			lobbies.forEach(function(lobby){
-				console.log('ROOM IS: ' + room);
 				if(lobby.id == room)
 					socket.emit('getLobbyCallback', lobby);
 			});
@@ -189,11 +196,8 @@ io.on('connection', function(socket){
 		// UPDATE MEMBERS
 		function updateMembers(id) {
 			lobbies.forEach(function(lobby){
-				console.log(lobby);
-				console.log("HMMM " + id);
 				if(lobby.id == id) {
 					io.to(id).emit('getMembersCallback', lobby.members);
-					console.log("HMMM " + id);
 				}
 			});
 		}

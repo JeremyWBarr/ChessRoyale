@@ -11,6 +11,8 @@ canvasWidth     = 0;
 selectedTile    = null;
 availableTiles  = [];
 
+
+
 // PIECE IMAGES
 var wPawn, 
     wKnight,
@@ -130,7 +132,7 @@ function Board(w, h, s) {
     }
 
     this.draw = function() {
-        if(mouseIsPressed) {
+        if(mouseX > 0 && mouseY > 0 && mouseX < canvasWidth && mouseY < canvasWidth && mouseIsPressed) {
             xoff = startX - mouseX;
             yoff = startY - mouseY;
 
@@ -220,38 +222,40 @@ function Piece(t, c, s) {
 
 // SELECT TILE 
 function mouseClicked() {
-    var xIndex = Math.floor((mouseX + (xoff * zoom))/(canvasWidth/24 * zoom));
-    var yIndex = Math.floor((mouseY + (yoff * zoom))/(canvasWidth/24 * zoom));
-    tempSelectedTile = board.tiles[xIndex][yIndex];
+    if(mouseX > 0 && mouseY > 0 && mouseX < canvasWidth && mouseY < canvasWidth) {
+        var xIndex = Math.floor((mouseX + (xoff * zoom))/(canvasWidth/24 * zoom));
+        var yIndex = Math.floor((mouseY + (yoff * zoom))/(canvasWidth/24 * zoom));
+        tempSelectedTile = board.tiles[xIndex][yIndex];
 
-    if(containsObject(tempSelectedTile, availableTiles)) {
-        // MOVE PIECE
-        tempSelectedTile.p = selectedTile.p;
-        selectedTile.p = null;
+        if(containsObject(tempSelectedTile, availableTiles)) {
+            // MOVE PIECE
+            tempSelectedTile.p = selectedTile.p;
+            selectedTile.p = null;
+            sendBoardState(board);
+        }
 
-    }
-    
-    // FIND AVAILABLE TILES
-    selectedTile = tempSelectedTile;
-    availableTiles = [];
+        // FIND AVAILABLE TILES
+        selectedTile = tempSelectedTile;
+        availableTiles = [];
 
-    if(selectedTile.p != null) {
-        selectedTile.p.getAvailableMoves().forEach(function(moveset){
-            console.log(moveset);
-            var deadEnd = false;
-            moveset.forEach(function(move) {
-                if( (selectedTile.x + move[0]) >= 0 && (selectedTile.x + move[0]) < board.tiles.length &&
-                    (selectedTile.y + move[1]) >= 0 && (selectedTile.y + move[1]) < board.tiles[0].length && !deadEnd) {
-                        console.log(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
-                        if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p == null) {
-                            availableTiles.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
-                        } else {
-                            // TODO: add enemy piecies
-                            deadEnd = true;
+        if(selectedTile.p != null) {
+            selectedTile.p.getAvailableMoves().forEach(function(moveset){
+                console.log(moveset);
+                var deadEnd = false;
+                moveset.forEach(function(move) {
+                    if( (selectedTile.x + move[0]) >= 0 && (selectedTile.x + move[0]) < board.tiles.length &&
+                        (selectedTile.y + move[1]) >= 0 && (selectedTile.y + move[1]) < board.tiles[0].length && !deadEnd) {
+                            console.log(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
+                            if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p == null) {
+                                availableTiles.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
+                            } else {
+                                // TODO: add enemy piecies
+                                deadEnd = true;
+                            }
                         }
-                    }
+                });
             });
-        });
+        }
     }
 }
 
@@ -265,8 +269,10 @@ function mouseWheel(event) {
 
 // OFFSET
 function mousePressed() {
-    startX = mouseX + xoff;
-    startY = mouseY + yoff;
+    if(mouseX > 0 && mouseY > 0 && mouseX < canvasWidth && mouseY < canvasWidth) {
+        startX = mouseX + xoff;
+        startY = mouseY + yoff;
+    }
 }
 
 function containsObject(obj, list) {
@@ -279,3 +285,17 @@ function containsObject(obj, list) {
 
     return false;
 }
+
+// BOARD STATE
+
+// SEND
+function sendBoardState(board) {
+    var jsonBoard = JSON.stringify(board);
+    socket.brodcast.to(lobbyId).emit('boardUpdate', jsonBoard);
+}
+
+//RECIEVE
+socket.on('boardUpdate', function(jsonBoard) {
+    var boardObject = JSON.parse(jsonBoard);
+    board = boardObject;
+});
