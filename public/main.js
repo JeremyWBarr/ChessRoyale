@@ -91,8 +91,8 @@ $(function() {
             var link                = document.createElement("a");
 
             if(lobbylist[i] !== null) {
-                link.innerHTML          = lobby.name;
-                link.href               = '\\lobby\\'+lobby.id;
+                link.innerHTML          = lobbylist[i].name;
+                link.href               = '\\lobby\\'+lobbylist[i].id;
             } else {
                 link.innerHTML          = '';
             }
