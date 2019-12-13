@@ -34,11 +34,6 @@ $(function() {
         socket.emit('createLobby');
     });
 
-    // JOIN LOBBY
-    $('.joinLobby').click(function() {
-        alert('join Clicked: '+ $(this).attr('name'));
-        socket.emit('joinLobby', $(this).attr('name'));
-    });
 });
 
 // ==================== SOCKET INBOUND EVENTS ==================== //
@@ -108,9 +103,7 @@ $(function() {
 
             if(i < lobbylist.length) {
                 link.innerHTML          = lobbylist[i].name;
-                link.href               = '#'
-                link.name               = lobbylist[i].id;
-                link.className          = 'joinLobby';
+                link.href               = 'javascript:joinLobby('+lobbylist[i].id+')';
             } else {
                 link.innerHTML          = '';
             }
@@ -183,6 +176,12 @@ $(function() {
     // GET MEMBERS
     function getMembers() {
         socket.emit('getMembers', lobbyId);
+    }
+
+    // JOIN LOBBY
+    function joinLobby(id) {
+        alert('join Clicked: '+ $(this).attr('name'));
+        socket.emit('joinLobby', $(this).attr('name'));
     }
 
 // FUNCTIONS
