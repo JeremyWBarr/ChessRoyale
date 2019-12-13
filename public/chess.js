@@ -1,14 +1,15 @@
 // GLOBALS
 var board;
 
-zoom        = 1;
-xoff        = 0;
-yoff        = 0;
-startX      = 0;
-startY      = 0;
-canvasWidth = 0;
+zoom            = 1;
+xoff            = 0;
+yoff            = 0;
+startX          = 0;
+startY          = 0;
+canvasWidth     = 0;
 
-selectedTile = null;
+selectedTile    = null;
+availableTiles  = [];
 
 // PIECE IMAGES
 var wPawn, 
@@ -158,7 +159,10 @@ function Tile(x, y, s, c) {
 
     this.draw = function() {
         fill(this.c);
-        if(this == selectedTile) fill(255, 0, 0);
+        if(this == selectedTile) 
+            fill('#d411cd');
+        if(containsObject(this, availableTiles))
+            fill('#dba2d9')
         var size = this.s * zoom;
         var xpos = this.x * size - (xoff * zoom);
         var ypos = this.y * size - (yoff * zoom);
@@ -168,6 +172,7 @@ function Tile(x, y, s, c) {
     }
 }
 
+// PIECE OBJECT
 function Piece(t, c, s) {
     this.t = t;
     this.c = c;
@@ -213,10 +218,25 @@ function Piece(t, c, s) {
     }
 }
 
+// SELECT TILE 
 function mouseClicked() {
     var xIndex = Math.floor((mouseX + (xoff * zoom))/(canvasWidth/24 * zoom));
     var yIndex = Math.floor((mouseY + (yoff * zoom))/(canvasWidth/24 * zoom));
     selectedTile = board.tiles[xIndex][yIndex];
+
+    availableTiles = [];
+    if(selectedTile.p != null) {
+        selectedTile.p.getAvailableMoves().forEach(function(move){
+            if( selectedTile.x + move[0] >= 0 && selectedTile.x + move[0] <= board.tiles.length &&
+                selectedTile.y + move[1] >= 0 && selectedTile.y + move[1] <= board.tiles[0].length) {
+                    if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p == null) {
+                        availableTile.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
+                    } else {
+                        // TODO: add enemy piecies
+                    }
+                }
+        });
+    }
 }
 
 // ZOOM
@@ -231,4 +251,15 @@ function mouseWheel(event) {
 function mousePressed() {
     startX = mouseX + xoff;
     startY = mouseY + yoff;
+}
+
+function containsObject(obj, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+        if (list[i] === obj) {
+            return true;
+        }
+    }
+
+    return false;
 }
