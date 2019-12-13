@@ -70,7 +70,6 @@ io.on('connection', function(socket){
 
 		// LOGIN
 		socket.on('login', function(u, p) {
-			console.log('AHHHH');
 			if(u && p) { 
 				pool.getConnection()
 					.then(conn => {
@@ -166,7 +165,7 @@ io.on('connection', function(socket){
 		}
 
 		// SEND MESSAGE 
-		function sendError(m) {
+		function sendMessage(m) {
 			socket.emit('message', 'MSG', m);
 		}
 

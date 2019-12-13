@@ -10,16 +10,12 @@ socket.emit('getLobbies');
 $(function() {
     // LOGIN
     $('.login').click(function(e) {
-        console.log("HEHEDF");
         socket.emit('login', $('#loginUsername').val(), $('#loginPassword').val());
     });
 
     // SIGNUP
-    $('.signup').submit(function(e){
+    $('.signup').click(function(e){
         socket.emit('signup', $('#signupUsername').val(), $('#signupPassword').val(),$('#signupPasswordCheck').val(), );
-        
-        e.preventDefault();
-        return false;
     });
 });
 

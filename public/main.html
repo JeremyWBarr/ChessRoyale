@@ -8,27 +8,35 @@
         <script src="https://github.com/processing/p5.js/releases/download/0.9.0/p5.js"></script>
 
         <script src="main.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
 
     <body>
 
         <!-- LOGIN FORM -->
         <div id='loginView' class='view' style='visibility: visible;'>
-            <input type='text'      id='loginUsername'       placeholder='Username'/>
-            <input type='password'  id='loginPassword'       placeholder='Password'/>
+            <img src='assests/White_King.png'>
+            <h1>Chess Royale</h1>
 
-            <input type='button' class='login' value='Login'/>
+            <input type='text'      id='loginUsername'       placeholder='Username'/><br/>
+            <input type='password'  id='loginPassword'       placeholder='Password'/><br/>
+
+            <input type='button' class='login' value='Login'/><br/>
+
+            <a href='#' class='switchSignup'>Create an account</a>
         </div>
 
         <!-- SIGNUP FORM -->
         <div id='signupView' class='view' style='visibility: hidden;'>
-            <form class='signup'>
-                <input type='text'      id='signupUsername'      placeholder='Username'/>
-                <input type='password'  id='signupPassword'      placeholder='Password'/>
-                <input type='password'  id='signupPasswordCheck' placeholder='Re-enter password'/>
+            <img src='assests/White_King.png'>
+            <h1>Chess Royale</h1>
 
-                <input type='submit' value='Sign up'/>
-            </form>
+            <input type='text'      id='signupUsername'      placeholder='Username'/><br/>
+            <input type='password'  id='signupPassword'      placeholder='Password'/><br/>
+            <input type='password'  id='signupPasswordCheck' placeholder='Re-enter password'/><br/>
+
+            <input type='button' class='signup' value='Sign up'/>
         </div>
 
         <!-- HOME PAGE -->
