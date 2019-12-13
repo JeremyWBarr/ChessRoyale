@@ -36,6 +36,7 @@ function preload() {
 // P5 SETUP
 function setup() {
     var parent = document.getElementById('chessContainer');
+    console.log(parent);
     board = new Board(24, 24, Math.floor(parent.width*.6) / 24)
 
     var c = createCanvas(Math.floor(parent.width*.6), Math.floor(parent.width*.6));
