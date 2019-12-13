@@ -135,7 +135,7 @@ io.on('connection', function(socket){
 			});
 			room = id;
 			socket.join(id);
-			
+
 			updateMembers(id)
 			
 			changeView("LOBBY");
@@ -207,6 +207,6 @@ class Lobby {
 }
 
 // LISTEN TO PORT
-http.listen(80, function(){
-    console.log('listening on *:80');
+http.listen(3000, function(){
+    console.log('listening on *:3000');
 });
