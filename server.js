@@ -137,7 +137,6 @@ io.on('connection', function(socket){
 			socket.join(id);
 
 			updateMembers(id);
-			
 			changeView("LOBBY");
 		});
 
@@ -192,6 +191,7 @@ io.on('connection', function(socket){
 		// UPDATE MEMBERS
 		function updateMembers(id) {
 			lobbies.forEach(function(lobby){
+				console.log(lobby);
 				if(lobby.id == id) io.to(id).emit('getMembersCallback', lobby.members);
 			});
 		}
