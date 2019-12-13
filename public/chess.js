@@ -229,29 +229,29 @@ function mouseClicked() {
         tempSelectedTile.p = selectedTile.p;
         selectedTile.p = null;
 
-    } else {
-        // FIND AVAILABLE TILES
-        selectedTile = tempSelectedTile;
-        availableTiles = [];
+    }
+    
+    // FIND AVAILABLE TILES
+    selectedTile = tempSelectedTile;
+    availableTiles = [];
 
-        if(selectedTile.p != null) {
-            selectedTile.p.getAvailableMoves().forEach(function(moveset){
-                console.log(moveset);
-                var deadEnd = false;
-                moveset.forEach(function(move) {
-                    if( (selectedTile.x + move[0]) >= 0 && (selectedTile.x + move[0]) < board.tiles.length &&
-                        (selectedTile.y + move[1]) >= 0 && (selectedTile.y + move[1]) < board.tiles[0].length && !deadEnd) {
-                            console.log(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
-                            if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p == null) {
-                                availableTiles.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
-                            } else {
-                                // TODO: add enemy piecies
-                                deadEnd = true;
-                            }
+    if(selectedTile.p != null) {
+        selectedTile.p.getAvailableMoves().forEach(function(moveset){
+            console.log(moveset);
+            var deadEnd = false;
+            moveset.forEach(function(move) {
+                if( (selectedTile.x + move[0]) >= 0 && (selectedTile.x + move[0]) < board.tiles.length &&
+                    (selectedTile.y + move[1]) >= 0 && (selectedTile.y + move[1]) < board.tiles[0].length && !deadEnd) {
+                        console.log(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
+                        if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p == null) {
+                            availableTiles.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
+                        } else {
+                            // TODO: add enemy piecies
+                            deadEnd = true;
                         }
-                });
+                    }
             });
-        }
+        });
     }
 }
 
