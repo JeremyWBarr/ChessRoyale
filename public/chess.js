@@ -45,7 +45,9 @@ function setup() {
     c.parent('chessContainer');
 
     board.init();
+    console.log('HERE1');
     board[12][12].p = new Piece(wPawn, color(255,0,0));
+    console.log('HERE2');
 }
 
 // P5 DRAW
@@ -108,6 +110,7 @@ function Tile(x, y, s, c) {
         var ypos = this.y * size - (yoff * zoom);
         rect(xpos, ypos, size, size);
 
+        if(this.p != null) console.log('HERE');
         if(this.p != null) p.draw(this.x, this.y);
     }
 }
@@ -117,7 +120,6 @@ function Piece(t, c) {
     this.c = c;
 
     this.draw = function(x, y) {
-        console.log('HERE');
         tint(this.c);
         image(this.t, x, y);
         noTint();
