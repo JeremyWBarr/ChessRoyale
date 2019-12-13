@@ -23,7 +23,7 @@ function preload() {
     wPawn   = loadImage('assets/White_Pawn.png');
     wKnight = loadImage('assets/White_Knight.png');
     wBishop = loadImage('assets/White_Bishop.png');
-    wRook   = loadImage('assets/White_Rook.png');;
+    wRook   = loadImage('assets/White_Rook.png');
     wQueen  = loadImage('assets/White_Queen.png');
     wKing   = loadImage('assets/White_King.png');
 }
@@ -39,7 +39,6 @@ function setup() {
     c.parent('chessContainer');
 
     board.init();
-    board.tiles[12][12].p = new Piece(wPawn, color(255,0,0), canvasWidth / 24);
 }
 
 // P5 DRAW
@@ -64,6 +63,21 @@ function Board(w, h, s) {
             }
             this.tiles[x] = row;
         }
+        // RED TEAM
+        this.tiles[0][0] = new Piece(wKing,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[1][1] = new Piece(wQueen,    color(255,0,0),     canvasWidth / 24);
+        this.tiles[0][1] = new Piece(wRook,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[1][0] = new Piece(wRook,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[0][2] = new Piece(wKnight,   color(255,0,0),     canvasWidth / 24);
+        this.tiles[2][0] = new Piece(wKnight,   color(255,0,0),     canvasWidth / 24);
+        this.tiles[0][3] = new Piece(wBishop,   color(255,0,0),     canvasWidth / 24);
+        this.tiles[3][0] = new Piece(wBishop,   color(255,0,0),     canvasWidth / 24);
+        this.tiles[4][0] = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[3][1] = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[2][1] = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[1][2] = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[1][3] = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[0][4] = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
     }
 
     this.draw = function() {
@@ -116,8 +130,38 @@ function Piece(t, c, s) {
         var xpos = x * size - (xoff * zoom);
         var ypos = y * size - (yoff * zoom);
         tint(this.c);
-        image(this.t, xpos, ypos, size-5, size-5);
+        image(this.t, xpos, ypos, size-6, size-6);
         noTint();
+    }
+
+    this.getAvailableMoves = function(x, y) {
+        switch(this.t) {
+            case wPawn:
+                return [(-1,1),(0,1),(1,1),(-1,0),(1,0),(-1,-1),(0,-1),(1,-1)];
+            case wKnight:
+                return [(-2,1),(-1,2),(1,2),(2,1),(2,-1),(1,-2),(-1,-2),(-2,-1)];
+            case wBishop:
+                return [(-7,-7),(-6,-6),(-5,-5),(-4,-4),(-3,-3),(-2,-2),(-1,-1),
+                        (7,-7),(6,-6),(5,-5),(4,-4),(3,3),(2,-2),(1,-1),
+                        (-7,7),(-6,6),(-5,5),(-4,4),(-3,3),(-2,2),(-1,1),
+                        (7,7),(6,6),(5,5),(4,4),(3,3),(2,2),(1,1)];
+            case wRook:
+                return [(0,7),(0,6),(0,5),(0,4),(0,3),(0,2),(0,1),
+                        (0,-7),(0,-6),(0,-5),(0,-4),(0,-3),(0,-2),(0,-1),
+                        (7,0),(6,0),(5,0),(4,0),(3,0),(2,0),(1,0),
+                        (-7,0),(-6,0),(-5,0),(-4,0),(-3,0),(-2,0),(-1,0)];
+            case wQueen:
+                return [(-7,-7),(-6,-6),(-5,-5),(-4,-4),(-3,-3),(-2,-2),(-1,-1),
+                        (7,-7),(6,-6),(5,-5),(4,-4),(3,3),(2,-2),(1,-1),
+                        (-7,7),(-6,6),(-5,5),(-4,4),(-3,3),(-2,2),(-1,1),
+                        (7,7),(6,6),(5,5),(4,4),(3,3),(2,2),(1,1),
+                        (0,7),(0,6),(0,5),(0,4),(0,3),(0,2),(0,1),
+                        (0,-7),(0,-6),(0,-5),(0,-4),(0,-3),(0,-2),(0,-1),
+                        (7,0),(6,0),(5,0),(4,0),(3,0),(2,0),(1,0),
+                        (-7,0),(-6,0),(-5,0),(-4,0),(-3,0),(-2,0),(-1,0)];
+            case wKing:
+                return [(-1,1),(0,1),(1,1),(-1,0),(1,0),(-1,-1),(0,-1),(1,-1)];
+        }
     }
 }
 
