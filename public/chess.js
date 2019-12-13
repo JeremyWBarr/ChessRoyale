@@ -120,7 +120,7 @@ function Piece(t, c) {
         tint(this.c);
         switch(this.t) {
             case "P":
-                image(wPawn, x, y);
+                //image(wPawn, x, y);
                 break;
         }
         noTint();
