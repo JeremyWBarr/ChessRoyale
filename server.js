@@ -148,7 +148,7 @@ io.on('connection', function(socket){
 		// GET LOBBY
 		socket.on('getLobby', function() {
 			lobbies.forEach(function(lobby){
-				console.log(lobby.id);
+				console.log('ROOM IS: ' + room);
 				if(lobby.id == room)
 					socket.emit('getLobbyCallback', lobby);
 			});

@@ -70,9 +70,11 @@ $(function() {
 
     // GET LOBBY CALLBACK
     socket.on('getLobbyCallback', function(lobby){
+        console.log(lobby);
+        
         lobbyId     = lobby.id;
         lobbyName   = lobby.name;
-        getMembers();
+        updateMembers(lobby.memberlist)
     });
 
     // GET LOBBIES CALLBACK
@@ -118,42 +120,7 @@ $(function() {
 
     // GET MEMBERS CALLBACK
     socket.on('getMembersCallback', function(memberlist){
-        console.log(memberlist);
-        
-        // CLEAR OLD LOBBIES TABLE
-        var oldTable = document.getElementsByClassName('memberTable');
-        if(oldTable.length > 0)
-            oldTable[0].remove();
-            
-
-        // CREATE DOM ELEMENTS
-        var container               = document.getElementsByClassName('memberTableContainer')[0];
-        var table                   = document.createElement('table');
-        table.className             = 'memberTable';
-        var header                  = document.createElement("th");
-        header.innerHTML            = 'Members:';
-
-        table.appendChild(header);
-
-        // ADD LOBBIES
-        for(var i = 0; i < 4; i++) {
-            var row                 = document.createElement("tr");
-            var cell                = document.createElement("td");
-            
-            var link                = document.createElement("a");
-
-            if(i < memberlist.length) {
-                link.innerHTML          = memberlist[i].name;
-            } else {
-                link.innerHTML          = '';
-            }
-
-            cell.appendChild(link);
-            row.appendChild(cell);
-            table.appendChild(row);
-        }
-
-        container.appendChild(table);
+        updateMembers(memberlist);
     });
 
 // ==================== SOCKET OUTBOUND EVENTS ==================== //
@@ -189,4 +156,43 @@ function showView(v) {
     view = v.toLowerCase();
     $('.view').css('visibility', 'hidden');
     $('#'+view+'View').css('visibility', 'visible');
+}
+
+function updateMembers(memberlist) {
+    console.log(memberlist);
+        
+    // CLEAR OLD LOBBIES TABLE
+    var oldTable = document.getElementsByClassName('memberTable');
+    if(oldTable.length > 0)
+        oldTable[0].remove();
+        
+
+    // CREATE DOM ELEMENTS
+    var container               = document.getElementsByClassName('memberTableContainer')[0];
+    var table                   = document.createElement('table');
+    table.className             = 'memberTable';
+    var header                  = document.createElement("th");
+    header.innerHTML            = 'Members:';
+
+    table.appendChild(header);
+
+    // ADD LOBBIES
+    for(var i = 0; i < 4; i++) {
+        var row                 = document.createElement("tr");
+        var cell                = document.createElement("td");
+        
+        var link                = document.createElement("a");
+
+        if(i < memberlist.length) {
+            link.innerHTML          = memberlist[i].name;
+        } else {
+            link.innerHTML          = '';
+        }
+
+        cell.appendChild(link);
+        row.appendChild(cell);
+        table.appendChild(row);
+    }
+
+    container.appendChild(table);
 }
