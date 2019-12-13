@@ -20,13 +20,18 @@ $(function() {
     });
 
     // SIGNUP
-    $('.signup').click(function(e){
+    $('.signup').click(function(e) {
         socket.emit('signup', $('#signupUsername').val(), $('#signupPassword').val(),$('#signupPasswordCheck').val(), );
     });
 
     // CREATE LOBBY
-    $('.createLobby').click(function(){
+    $('.createLobby').click(function() {
         socket.emit('createLobby');
+    });
+
+    // JOIN LOBBY
+    $('.joinLobby').click(function() {
+        socket.emit('joinLobby', $(this).attr('name'));
     });
 });
 
@@ -96,7 +101,8 @@ $(function() {
 
             if(i < lobbylist.length) {
                 link.innerHTML          = lobbylist[i].name;
-                link.href               = '\\lobby\\'+lobbylist[i].id;
+                link.name               = lobbylist[i].id;
+                link.className          = 'joinLobby';
             } else {
                 link.innerHTML          = '';
             }
