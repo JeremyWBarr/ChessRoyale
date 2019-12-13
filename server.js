@@ -130,8 +130,8 @@ io.on('connection', function(socket){
 
 		// JOIN LOBBY
 		socket.on('joinLobby', function(id) {
-			lobbies.forEach(function(lobby) {
-				if(lobby.id == id) lobby.members.push(username);
+			lobbies.forEach(function(lobby, i) {
+				if(lobby.id == id) lobbies[i].members.push(username);
 			});
 			room = id;
 			socket.join(id);
@@ -191,7 +191,6 @@ io.on('connection', function(socket){
 		// UPDATE MEMBERS
 		function updateMembers(id) {
 			lobbies.forEach(function(lobby){
-				console.log(lobby);
 				if(lobby.id == id) io.to(id).emit('getMembersCallback', lobby.members);
 			});
 		}
@@ -199,10 +198,10 @@ io.on('connection', function(socket){
 
 // LOBBY OBJECT
 class Lobby {
-    constructor(i, n) {
+    constructor(i, n, m) {
         this.id = i;
 		this.name = n;
-		this.members = [];
+		this.members = m;
     }
 }
 
