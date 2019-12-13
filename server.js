@@ -192,6 +192,7 @@ io.on('connection', function(socket){
 		function updateMembers(id) {
 			lobbies.forEach(function(lobby){
 				console.log(lobby);
+				console.log("HMMM " + id);
 				if(lobby.id == id) {
 					io.to(id).emit('getMembersCallback', lobby.members);
 					console.log("HMMM " + id);
