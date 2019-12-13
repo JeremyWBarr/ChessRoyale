@@ -103,7 +103,7 @@ $(function() {
 
             if(i < lobbylist.length) {
                 link.innerHTML          = lobbylist[i].name;
-                link.href               = 'javascript:joinLobby('+lobbylist[i].id+')';
+                link.href               = 'javascript:joinLobby("'+lobbylist[i].id+'")';
             } else {
                 link.innerHTML          = '';
             }
