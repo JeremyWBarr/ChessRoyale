@@ -69,7 +69,7 @@ $(function() {
     // GET USERNAME CALLBACK
     socket.on('getUsernameCallback', function(username){
         user = username;
-        $('.loggedInAs').html('Logged in as: '+username + '! (<a class=switchLogin>logout</a>)');
+        $('.loggedInAs').html('Logged in as: '+username + '! (<a href=# class=switchLogin>logout</a>)');
     });
 
     //GET LOBBY CALLBACK
