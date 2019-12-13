@@ -231,7 +231,7 @@ function mouseClicked() {
             if( selectedTile.x + move[0] >= 0 && selectedTile.x + move[0] <= board.tiles.length &&
                 selectedTile.y + move[1] >= 0 && selectedTile.y + move[1] <= board.tiles[0].length) {
                     if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p == null) {
-                        availableTile.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
+                        availableTiles.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
                     } else {
                         // TODO: add enemy piecies
                     }
