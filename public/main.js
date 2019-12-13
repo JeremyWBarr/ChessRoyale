@@ -180,7 +180,6 @@ $(function() {
 
     // JOIN LOBBY
     function joinLobby(id) {
-        alert('join Clicked: '+ $(this).attr('name'));
         socket.emit('joinLobby', $(this).attr('name'));
     }
 
