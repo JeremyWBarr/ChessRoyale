@@ -139,6 +139,12 @@ a {
     width: 40%;
 }
 
+#lobbyMenu h2 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: white;
+}
+
 #chessContainer canvas {
     margin: 0;
     position: absolute;

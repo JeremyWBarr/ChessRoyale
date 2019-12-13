@@ -74,6 +74,9 @@ $(function() {
 
         lobbyId     = lobby.id;
         lobbyName   = lobby.name;
+
+        $('.lobbyName').html("Welcome to " + lobby.Name + "'s Lobby");
+
         updateMembers(lobby.members);
     });
 
