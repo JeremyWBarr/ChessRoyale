@@ -134,8 +134,9 @@ a {
 
 /* LOBBY CANVAS */
 
-#lobbyView img, #lobbyView p, #lobbyView h1 {
+#lobbyMenu {
     float:left;
+    width: 40%;
 }
 
 #chessContainer canvas {
