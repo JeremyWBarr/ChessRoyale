@@ -146,14 +146,12 @@ io.on('connection', function(socket){
 		});
 
 		// GET LOBBY
-		socket.on('getLobby', function(id) {
-			name = '';
+		socket.on('getLobby', function() {
 			lobbies.forEach(function(lobby){
 				console.log(lobby.id);
-				if(lobby.id == id)
-					name = lobby.name;
+				if(lobby.id == room)
+					socket.emit('getLobbyCallback', lobby);
 			});
-			socket.emit('getLobbyCallback', name);
 		})
 
 		// GET LOBBIES
