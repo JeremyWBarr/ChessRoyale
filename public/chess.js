@@ -1,5 +1,5 @@
 // GLOBALS
-board   = new Board(24, 24, 30);
+board   = new Board(24, 24, 28);
 
 zoom    = 1;
 xoff    = 0;
@@ -18,7 +18,7 @@ var     bPawn,      wPawn,
         bKing,      wKing;
 
 // P5 PRELOAD
-/*function preload() {
+function preload() {
     Pawn   = loadImage('assets/Black_Pawn.png');
     wPawn   = loadImage('assets/White_Pawn.png');
     bKnight = loadImage('assets/Black_Knight.png');
@@ -31,11 +31,11 @@ var     bPawn,      wPawn,
     wQueen  = loadImage('assets/White_Queen.png');
     bKing   = loadImage('assets/Black_King.png');
     wKing   = loadImage('assets/White_King.png');
-}*/
+}
 
 // P5 SETUP
 function setup() {
-    var c = createCanvas(720, 720);
+    var c = createCanvas(672, 672);
     c.parent('chessContainer');
 
     board.init();
@@ -119,8 +119,8 @@ function Piece(t, c) {
 }
 
 function mouseClicked() {
-    var xIndex = Math.floor((mouseX + (xoff * zoom))/(30 * zoom));
-    var yIndex = Math.floor((mouseY + (yoff * zoom))/(30 * zoom));
+    var xIndex = Math.floor((mouseX + (xoff * zoom))/(28 * zoom));
+    var yIndex = Math.floor((mouseY + (yoff * zoom))/(28 * zoom));
     selectedTile = board.tiles[xIndex][yIndex];
 }
 

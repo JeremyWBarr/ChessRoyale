@@ -131,3 +131,11 @@ a {
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
 }
+
+/* LOBBY CANVAS */
+
+#lobbyView canvas {
+    margin: 0;
+    top: 0;
+    float: right;
+}
