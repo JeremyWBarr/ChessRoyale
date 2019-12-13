@@ -194,24 +194,24 @@ function Piece(t, c, s) {
             case wKnight:
                 return [[-2,1],[-1,2],[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1]];
             case wBishop:
-                return [[-7,-7],[-6,-6],[-5,-5],[-4,-4],[-3,-3],[-2,-2],[-1,-1],
-                        [7,-7],[6,-6],[5,-5],[4,-4],[3,3],[2,-2],[1,-1],
-                        [-7,7],[-6,6],[-5,5],[-4,4],[-3,3],[-2,2],[-1,1],
-                        [7,7],[6,6],[5,5],[4,4],[3,3],[2,2],[1,1]];
+                return [[[-7,-7],[-6,-6],[-5,-5],[-4,-4],[-3,-3],[-2,-2],[-1,-1]],
+                        [[7,-7],[6,-6],[5,-5],[4,-4],[3,3],[2,-2],[1,-1]],
+                        [[-7,7],[-6,6],[-5,5],[-4,4],[-3,3],[-2,2],[-1,1]],
+                        [[7,7],[6,6],[5,5],[4,4],[3,3],[2,2],[1,1]]];
             case wRook:
-                return [[0,7],[0,6],[0,5],[0,4],[0,3],[0,2],[0,1],
-                        [0,-7],[0,-6],[0,-5],[0,-4],[0,-3],[0,-2],[0,-1],
-                        [7,0],[6,0],[5,0],[4,0],[3,0],[2,0],[1,0],
-                        [-7,0],[-6,0],[-5,0],[-4,0],[-3,0],[-2,0],[-1,0]];
+                return [[[0,7],[0,6],[0,5],[0,4],[0,3],[0,2],[0,1]],
+                        [[0,-7],[0,-6],[0,-5],[0,-4],[0,-3],[0,-2],[0,-1]],
+                        [[7,0],[6,0],[5,0],[4,0],[3,0],[2,0],[1,0]],
+                        [[-7,0],[-6,0],[-5,0],[-4,0],[-3,0],[-2,0],[-1,0]]];
             case wQueen:
-                return [[-7,-7],[-6,-6],[-5,-5],[-4,-4],[-3,-3],[-2,-2],[-1,-1],
-                        [7,-7],[6,-6],[5,-5],[4,-4],[3,3],[2,-2],[1,-1],
-                        [-7,7],[-6,6],[-5,5],[-4,4],[-3,3],[-2,2],[-1,1],
-                        [7,7],[6,6],[5,5],[4,4],[3,3],[2,2],[1,1],
-                        [0,7],[0,6],[0,5],[0,4],[0,3],[0,2],[0,1],
-                        [0,-7],[0,-6],[0,-5],[0,-4],[0,-3],[0,-2],[0,-1],
-                        [7,0],[6,0],[5,0],[4,0],[3,0],[2,0],[1,0],
-                        [-7,0],[-6,0],[-5,0],[-4,0],[-3,0],[-2,0],[-1,0]];
+                return [[[-7,-7],[-6,-6],[-5,-5],[-4,-4],[-3,-3],[-2,-2],[-1,-1]],
+                        [[7,-7],[6,-6],[5,-5],[4,-4],[3,3],[2,-2],[1,-1]],
+                        [[-7,7],[-6,6],[-5,5],[-4,4],[-3,3],[-2,2],[-1,1]],
+                        [[7,7],[6,6],[5,5],[4,4],[3,3],[2,2],[1,1]],
+                        [[0,7],[0,6],[0,5],[0,4],[0,3],[0,2],[0,1]],
+                        [[0,-7],[0,-6],[0,-5],[0,-4],[0,-3],[0,-2],[0,-1]],
+                        [[7,0],[6,0],[5,0],[4,0],[3,0],[2,0],[1,0]],
+                        [[-7,0],[-6,0],[-5,0],[-4,0],[-3,0],[-2,0],[-1,0]]];
             case wKing:
                 return [[-1,1],[0,1],[1,1],[-1,0],[1,0],[-1,-1],[0,-1],[1,-1]];
         }
@@ -226,18 +226,19 @@ function mouseClicked() {
 
     availableTiles = [];
     if(selectedTile.p != null) {
-        selectedTile.p.getAvailableMoves().forEach(function(move){
-            console.log(move);
-            console.log((selectedTile.x + move[0]) + ", " + (selectedTile.y + move[1]));
-            if( (selectedTile.x + move[0]) >= 0 && (selectedTile.x + move[0]) < board.tiles.length &&
-                (selectedTile.y + move[1]) >= 0 && (selectedTile.y + move[1]) < board.tiles[0].length) {
-                    console.log(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
-                    if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p == null) {
-                        availableTiles.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
-                    } else {
-                        // TODO: add enemy piecies
+        selectedTile.p.getAvailableMoves().forEach(function(moveset){
+            moveset.forEach(function(move){
+                if( (selectedTile.x + move[0]) >= 0 && (selectedTile.x + move[0]) < board.tiles.length &&
+                    (selectedTile.y + move[1]) >= 0 && (selectedTile.y + move[1]) < board.tiles[0].length) {
+                        console.log(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
+                        if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p == null) {
+                            availableTiles.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
+                        } else {
+                            // TODO: add enemy piecies
+                            return;
+                        }
                     }
-                }
+            });
         });
     }
 }
