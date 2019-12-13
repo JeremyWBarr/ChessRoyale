@@ -14,9 +14,14 @@ $(function() {
         socket.emit('login', $('#loginUsername').val(), $('#loginPassword').val());
     });
     
-    // CREATE ACCOUNT
+    // SWITCH SIGNUP
     $('.switchSignup').click(function(e) {
         showView('SIGNUP');
+    });
+
+    // SWITCH LOGIN
+    $('.switchLogin').click(function(e) {
+        showView('LOGIN');
     });
 
     // SIGNUP
@@ -64,11 +69,11 @@ $(function() {
     // GET USERNAME CALLBACK
     socket.on('getUsernameCallback', function(username){
         user = username;
-        $('.loggedInAs').html('Logged in as: '+username);
+        $('.loggedInAs').html('Logged in as: '+username + '! (<a class=switchLogin>logout</a>)');
     });
 
     //GET LOBBY CALLBACK
-    socket.on('getUsernameCallback', function(lobby){
+    socket.on('getLobbyCallback', function(lobby){
         lobbyId     = lobby.id;
         lobbyName   = lobby.name;
     });
@@ -93,7 +98,7 @@ $(function() {
         table.appendChild(header);
 
         // ADD LOBBIES
-        for(var i = 0; i < 10; i++) {
+        for(var i = 0; i < 5; i++) {
             var row                 = document.createElement("tr");
             var cell                = document.createElement("td");
             
