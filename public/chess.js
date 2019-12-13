@@ -20,8 +20,8 @@ var wPawn,
 
 // P5 PRELOAD
 function preload() {
-    wPawn   = loadImage('assets/White_Pawn.png'););
-    wKnight = loadImage('assets/White_Knight.png'););
+    wPawn   = loadImage('assets/White_Pawn.png');
+    wKnight = loadImage('assets/White_Knight.png');
     wBishop = loadImage('assets/White_Bishop.png');
     wRook   = loadImage('assets/White_Rook.png');;
     wQueen  = loadImage('assets/White_Queen.png');
