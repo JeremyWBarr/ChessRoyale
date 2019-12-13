@@ -134,8 +134,13 @@ a {
 
 /* LOBBY CANVAS */
 
+#homeView img, #homeView p, #homeView h1 {
+    float:left;
+}
+
 #chessContainer canvas {
     margin: 0;
+    margin-right: 50px;
     top: 0;
     float: right;
 }
