@@ -113,8 +113,8 @@ function Piece(t, c, s) {
 
     this.draw = function(x, y) {
         var size = this.s * zoom;
-        var xpos = this.x * size - (xoff * zoom);
-        var ypos = this.y * size - (yoff * zoom);
+        var xpos = x * size - (xoff * zoom);
+        var ypos = y * size - (yoff * zoom);
         tint(this.c);
         image(this.t, xpos, ypos, size-5, size-5);
         noTint();
