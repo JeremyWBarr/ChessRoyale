@@ -176,7 +176,7 @@ io.on('connection', function(socket){
 
 		// UPDATE LOBBIES
 		function updateLobbies() {
-			io.emit('updateLobbies', lobbies);
+			io.emit('getLobbiesCallback', lobbies);
 		}
 });
 
