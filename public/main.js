@@ -147,7 +147,7 @@ $(function() {
 
     // JOIN LOBBY
     function joinLobby(id) {
-        socket.emit('joinLobby', $(this).attr('name'));
+        socket.emit('joinLobby', id);
     }
 
 // FUNCTIONS
@@ -184,7 +184,7 @@ function updateMembers(memberlist) {
         var link                = document.createElement("a");
 
         if(i < memberlist.length) {
-            link.innerHTML          = memberlist[i].name;
+            link.innerHTML          = memberlist[i];
         } else {
             link.innerHTML          = '';
         }

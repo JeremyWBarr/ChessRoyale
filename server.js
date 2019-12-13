@@ -130,8 +130,8 @@ io.on('connection', function(socket){
 
 		// JOIN LOBBY
 		socket.on('joinLobby', function(id) {
-			lobbies.forEach(function(lobby, i) {
-				if(lobby.id == id) lobbies[i].members.push(username);
+			lobbies.forEach(function(lobby) {
+				if(lobby.id == id) lobby.members.push(username);
 			});
 			room = id;
 			socket.join(id);
