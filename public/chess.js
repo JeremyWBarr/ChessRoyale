@@ -190,9 +190,9 @@ function Piece(t, c, s) {
     this.getAvailableMoves = function(x, y) {
         switch(this.t) {
             case wPawn:
-                return [[-1,1],[0,1],[1,1],[-1,0],[1,0],[-1,-1],[0,-1],[1,-1]];
+                return [[[-1,1],[0,1],[1,1],[-1,0],[1,0],[-1,-1],[0,-1],[1,-1]]];
             case wKnight:
-                return [[-2,1],[-1,2],[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1]];
+                return [[[-2,1],[-1,2],[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1]]];
             case wBishop:
                 return [[[-7,-7],[-6,-6],[-5,-5],[-4,-4],[-3,-3],[-2,-2],[-1,-1]],
                         [[7,-7],[6,-6],[5,-5],[4,-4],[3,3],[2,-2],[1,-1]],
@@ -213,7 +213,7 @@ function Piece(t, c, s) {
                         [[7,0],[6,0],[5,0],[4,0],[3,0],[2,0],[1,0]],
                         [[-7,0],[-6,0],[-5,0],[-4,0],[-3,0],[-2,0],[-1,0]]];
             case wKing:
-                return [[-1,1],[0,1],[1,1],[-1,0],[1,0],[-1,-1],[0,-1],[1,-1]];
+                return [[[-1,1],[0,1],[1,1],[-1,0],[1,0],[-1,-1],[0,-1],[1,-1]]];
         }
     }
 }
@@ -227,6 +227,7 @@ function mouseClicked() {
     availableTiles = [];
     if(selectedTile.p != null) {
         selectedTile.p.getAvailableMoves().forEach(function(moveset){
+            console.log(moveset);
             moveset.forEach(function(move){
                 if( (selectedTile.x + move[0]) >= 0 && (selectedTile.x + move[0]) < board.tiles.length &&
                     (selectedTile.y + move[1]) >= 0 && (selectedTile.y + move[1]) < board.tiles[0].length) {
