@@ -134,7 +134,7 @@ a {
 
 /* LOBBY CANVAS */
 
-#homeView img, #homeView p, #homeView h1 {
+#lobbyView img, #lobbyView p, #lobbyView h1 {
     float:left;
 }
 
