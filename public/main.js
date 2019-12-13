@@ -90,7 +90,7 @@ $(function() {
             
             var link                = document.createElement("a");
 
-            if(lobbylist[i] !== null) {
+            if(i < lobbylist.length) {
                 link.innerHTML          = lobbylist[i].name;
                 link.href               = '\\lobby\\'+lobbylist[i].id;
             } else {
