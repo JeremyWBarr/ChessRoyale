@@ -130,13 +130,13 @@ io.on('connection', function(socket){
 
 		// JOIN LOBBY
 		socket.on('joinLobby', function(id) {
-			lobbies.forEach(function(lobby){
+			lobbies.forEach(function(lobby) {
 				if(lobby.id == id) lobby.members.push(username);
 			});
 			room = id;
 			socket.join(id);
 
-			updateMembers(id)
+			updateMembers(id);
 			
 			changeView("LOBBY");
 		});
@@ -164,9 +164,7 @@ io.on('connection', function(socket){
 
 		// GET MEMBERS
 		socket.on('getMembers', function(id) {
-			lobbies.forEach(function(lobby){
-				if(lobby.id == id) socket.emit('getMembersCallback', lobby.members);
-			});
+			updateMembers(id);
 		});
 
 	// ==================== SOCKET OUTBOUND EVENTS ==================== //
@@ -193,7 +191,9 @@ io.on('connection', function(socket){
 
 		// UPDATE MEMBERS
 		function updateMembers(id) {
-			io.in(id).emit('getMembersCallback', lobbies);
+			lobbies.forEach(function(lobby){
+				if(lobby.id == id) io.in(id).emit('getMembersCallback', lobby.members);
+			});
 		}
 });
 
