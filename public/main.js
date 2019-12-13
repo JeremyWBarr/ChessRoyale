@@ -82,7 +82,7 @@ $(function() {
         table.appendChild(header);
 
         // ADD LOBBIES
-        for(var i = 0; i < 15; i++) {
+        for(var i = 0; i < 10; i++) {
             var row                 = document.createElement("tr");
             var cell                = document.createElement("td");
             
