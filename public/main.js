@@ -71,10 +71,10 @@ $(function() {
     // GET LOBBY CALLBACK
     socket.on('getLobbyCallback', function(lobby){
         console.log(lobby);
-        
+
         lobbyId     = lobby.id;
         lobbyName   = lobby.name;
-        updateMembers(lobby.memberlist)
+        updateMembers(lobby.members);
     });
 
     // GET LOBBIES CALLBACK
