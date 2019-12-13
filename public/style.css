@@ -80,6 +80,11 @@ a {
     color:  rgb(186, 237, 255);
 }
 
+#homeView h1, #lobbyView h1 {
+    color: white;
+    margin: 0;
+}
+
 /* HOME TABLE */
 #homeView table {
     margin: auto auto;
