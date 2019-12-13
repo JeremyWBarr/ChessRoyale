@@ -1,11 +1,12 @@
 // GLOBALS
 var board;
 
-zoom    = 1;
-xoff    = 0;
-yoff    = 0;
-startX  = 0;
-startY  = 0;
+zoom        = 1;
+xoff        = 0;
+yoff        = 0;
+startX      = 0;
+startY      = 0;
+canvasWidth = 0;
 
 selectedTile = null;
 
@@ -36,7 +37,7 @@ function preload() {
 // P5 SETUP
 function setup() {
     var parent      = document.getElementById('chessContainer');
-    var canvasWidth = Math.floor((parent.offsetWidth-60)*.6);
+    canvasWidth     = Math.floor((parent.offsetWidth-60)*.6);
 
     board = new Board(24, 24, canvasWidth / 24)
 
@@ -44,7 +45,7 @@ function setup() {
     c.parent('chessContainer');
 
     board.init();
-    //board[0][23].p = new Piece("P", color(255,0,0));
+    board[12][12].p = new Piece("P", color(255,0,0));
 }
 
 // P5 DRAW
@@ -106,6 +107,8 @@ function Tile(x, y, s, c) {
         var xpos = this.x * size - (xoff * zoom);
         var ypos = this.y * size - (yoff * zoom);
         rect(xpos, ypos, size, size);
+
+        if(this.p != null) p.draw();
     }
 }
 
@@ -124,8 +127,8 @@ function Piece(t, c) {
 }
 
 function mouseClicked() {
-    var xIndex = Math.floor((mouseX + (xoff * zoom))/(28 * zoom));
-    var yIndex = Math.floor((mouseY + (yoff * zoom))/(28 * zoom));
+    var xIndex = Math.floor((mouseX + (xoff * zoom))/(canvasWidth/24 * zoom));
+    var yIndex = Math.floor((mouseY + (yoff * zoom))/(canvasWidth/24 * zoom));
     selectedTile = board.tiles[xIndex][yIndex];
 }
 
