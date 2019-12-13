@@ -45,7 +45,7 @@ function setup() {
     c.parent('chessContainer');
 
     board.init();
-    board[12][12].p = new Piece("P", color(255,0,0));
+    board[12][12].p = new Piece(wPawn, color(255,0,0));
 }
 
 // P5 DRAW
@@ -117,12 +117,9 @@ function Piece(t, c) {
     this.c = c;
 
     this.draw = function(x, y) {
+        console.log('HERE');
         tint(this.c);
-        switch(this.t) {
-            case "P":
-                image(wPawn, x, y);
-                break;
-        }
+        image(this.t, x, y);
         noTint();
     }
 }
