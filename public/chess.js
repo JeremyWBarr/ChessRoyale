@@ -108,6 +108,7 @@ function Tile(x, y, s, c) {
         var ypos = this.y * size - (yoff * zoom);
         rect(xpos, ypos, size, size);
 
+        console.log('here');
         if(this.p != null) p.draw(this.x, this.y);
     }
 }
@@ -117,8 +118,11 @@ function Piece(t, c) {
     this.c = c;
 
     this.draw = function(x, y) {
+        console.log('here1');
         tint(this.c);
+        console.log('here2');
         image(this.t, x, y);
+        console.log('here3');
         noTint();
     }
 }
