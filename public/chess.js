@@ -108,7 +108,7 @@ function Tile(x, y, s, c) {
         var ypos = this.y * size - (yoff * zoom);
         rect(xpos, ypos, size, size);
 
-        if(this.p != null) p.draw();
+        if(this.p != null) p.draw(this.x, this.y);
     }
 }
 
@@ -120,7 +120,7 @@ function Piece(t, c) {
         tint(this.c);
         switch(this.t) {
             case "P":
-                //image(wPawn, x, y);
+                image(wPawn, x, y);
                 break;
         }
         noTint();
