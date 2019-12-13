@@ -36,7 +36,7 @@ function preload() {
 // P5 SETUP
 function setup() {
     var parent      = document.getElementById('chessContainer');
-    var canvasWidth = Math.floor(parent.offsetWidth*.6);
+    var canvasWidth = Math.floor((parent.offsetWidth-60)*.6);
 
     board = new Board(24, 24, canvasWidth / 24)
 
