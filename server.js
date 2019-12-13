@@ -46,7 +46,7 @@ io.on('connection', function(socket){
 			if(p == c) {
 				pool.getConnection()
 					.then(conn => {
-						conn.query("INSERT INTO user value (?, ?)", [u, p])
+						conn.query("INSERT INTO user (name, password) value (?, ?)", [u, p])
 							.catch(err => {
 								//handle error
 								hadError = true;
