@@ -8,6 +8,7 @@ socket.emit('getLobbies');
 // ==================== FORM SUBMISSIONS ==================== //
 
 $(function() {
+    
     // LOGIN
     $('.login').click(function(e) {
         socket.emit('login', $('#loginUsername').val(), $('#loginPassword').val());
@@ -21,6 +22,11 @@ $(function() {
     // SIGNUP
     $('.signup').click(function(e){
         socket.emit('signup', $('#signupUsername').val(), $('#signupPassword').val(),$('#signupPasswordCheck').val(), );
+    });
+
+    // CREATE LOBBY
+    $('.createLobby').click(function(){
+        socket.emit('createLobby');
     });
 });
 
@@ -124,7 +130,7 @@ $(function() {
     }
 
     // GET LOBBY
-    function getLobby(){
+    function getLobby() {
         socket.emit('getLobby');
     }
 
@@ -132,11 +138,6 @@ $(function() {
     function getLobbies() {
         socket.emit('getLobbies');
     }
-
-    // CREATE LOBBY
-    $('.createLobby').click(function(){
-        socket.emit('createLobby');
-    });
 
 
 // FUNCTIONS
