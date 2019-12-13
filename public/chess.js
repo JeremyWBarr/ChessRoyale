@@ -39,7 +39,7 @@ function setup() {
     c.parent('chessContainer');
 
     board.init();
-    board.tiles[12][12].p = new Piece(wPawn, color(255,0,0));
+    board.tiles[12][12].p = new Piece(wPawn, color(255,0,0), canvasWidth / 24);
 }
 
 // P5 DRAW
@@ -106,9 +106,10 @@ function Tile(x, y, s, c) {
     }
 }
 
-function Piece(t, c) {
+function Piece(t, c, s) {
     this.t = t;
     this.c = c;
+    this.s = s;
 
     this.draw = function(x, y) {
         var size = this.s * zoom;
