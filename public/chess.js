@@ -228,7 +228,7 @@ function mouseClicked() {
     if(selectedTile.p != null) {
         selectedTile.p.getAvailableMoves().forEach(function(move){
             console.log(move);
-            console.log(selectedTile.x + move[0] + ", " + selectedTile.y + move[1])
+            console.log((selectedTile.x + move[0]) + ", " + (selectedTile.y + move[1]));
             if( selectedTile.x + move[0] >= 0 && selectedTile.x + move[0] <= board.tiles.length &&
                 selectedTile.y + move[1] >= 0 && selectedTile.y + move[1] <= board.tiles[0].length) {
                     console.log(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
