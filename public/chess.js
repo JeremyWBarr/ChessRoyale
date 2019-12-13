@@ -1,5 +1,5 @@
 // GLOBALS
-board   = new Board(24, 24, 28);
+var board;
 
 zoom    = 1;
 xoff    = 0;
@@ -19,7 +19,7 @@ var     bPawn,      wPawn,
 
 // P5 PRELOAD
 function preload() {
-    Pawn   = loadImage('assets/Black_Pawn.png');
+    bPawn   = loadImage('assets/Black_Pawn.png');
     wPawn   = loadImage('assets/White_Pawn.png');
     bKnight = loadImage('assets/Black_Knight.png');
     wKnight = loadImage('assets/White_Knight.png');
@@ -35,8 +35,13 @@ function preload() {
 
 // P5 SETUP
 function setup() {
-    var c = createCanvas(672, 672);
+    var parent = select('#chessContainer');
+    board = new Board(24, 24, parent.width*.6 / 24)
+
+    var c = createCanvas(parent.width*.6, parent.width*.6);
     c.parent('chessContainer');
+
+
 
     board.init();
     //board[0][23].p = new Piece("P", color(255,0,0));
