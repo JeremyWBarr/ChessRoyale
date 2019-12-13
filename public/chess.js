@@ -11,26 +11,20 @@ canvasWidth = 0;
 selectedTile = null;
 
 // PIECE IMAGES
-var     bPawn,      wPawn, 
-        bKnight,    wKnight,
-        bBishop,    wBishop,
-        bRook,      wRook,
-        bQueen,     wQueen,
-        bKing,      wKing;
+var wPawn, 
+    wKnight,
+    wBishop,
+    wRook,
+    wQueen,
+    wKing;
 
 // P5 PRELOAD
 function preload() {
-    bPawn   = loadImage('assets/Black_Pawn.png');
-    wPawn   = loadImage('assets/White_Pawn.png');
-    bKnight = loadImage('assets/Black_Knight.png');
-    wKnight = loadImage('assets/White_Knight.png');
-    bBishop = loadImage('assets/Black_Bishop.png');
+    wPawn   = loadImage('assets/White_Pawn.png'););
+    wKnight = loadImage('assets/White_Knight.png'););
     wBishop = loadImage('assets/White_Bishop.png');
-    bRook   = loadImage('assets/Black_Rook.png');
-    wRook   = loadImage('assets/White_Rook.png');
-    bQueen  = loadImage('assets/Black_Queen.png');
+    wRook   = loadImage('assets/White_Rook.png');;
     wQueen  = loadImage('assets/White_Queen.png');
-    bKing   = loadImage('assets/Black_King.png');
     wKing   = loadImage('assets/White_King.png');
 }
 
@@ -117,8 +111,11 @@ function Piece(t, c) {
     this.c = c;
 
     this.draw = function(x, y) {
+        var size = this.s * zoom;
+        var xpos = this.x * size - (xoff * zoom);
+        var ypos = this.y * size - (yoff * zoom);
         tint(this.c);
-        image(this.t, x, y);
+        image(this.t, xpos, ypos, size-5, size-5);
         noTint();
     }
 }
