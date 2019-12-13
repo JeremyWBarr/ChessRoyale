@@ -100,3 +100,13 @@ html {
     border: 2px solid rgb(103, 145, 160);
     height: 30px;
 }
+
+#homeView table tr:first-child {
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+#homeView table tr:last-child {
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
