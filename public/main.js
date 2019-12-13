@@ -12,6 +12,11 @@ $(function() {
     $('.login').click(function(e) {
         socket.emit('login', $('#loginUsername').val(), $('#loginPassword').val());
     });
+    
+    // CREATE ACCOUNT
+    $('.switchSignup').click(function(e) {
+        showView('SIGNUP');
+    });
 
     // SIGNUP
     $('.signup').click(function(e){
@@ -20,8 +25,6 @@ $(function() {
 });
 
 // ==================== SOCKET INBOUND EVENTS ==================== //
-
- 
 
     // RECIEVE MESSAGE
     socket.on('message', function(type, message){
