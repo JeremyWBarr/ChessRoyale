@@ -107,7 +107,7 @@ io.on('connection', function(socket){
 		socket.on('createLobby', function() {
 			var id      = Math.random().toString(36).substring(2, 10);
 			var name    = username + "'s Lobby";
-			var lobby 	= new Lobby(id, name);
+			var lobby 	= new Lobby(id, name, [username]);
 			
 			lobbies.push(lobby);
 			
@@ -130,8 +130,13 @@ io.on('connection', function(socket){
 
 		// JOIN LOBBY
 		socket.on('joinLobby', function(id) {
+			lobbies.forEach(function(lobby){
+				if(lobby.id == id) lobby.members.push(username);
+			});
 			room = id;
 			socket.join(id);
+			
+			updateMembers(id)
 			
 			changeView("LOBBY");
 		});
@@ -157,6 +162,13 @@ io.on('connection', function(socket){
 			socket.emit('getLobbiesCallback', lobbies);
 		});
 
+		// GET MEMBERS
+		socket.on('getMembers', function(id) {
+			lobbies.forEach(function(lobby){
+				if(lobby.id == id) socket.emit('getMembersCallback', lobby.members);
+			});
+		});
+
 	// ==================== SOCKET OUTBOUND EVENTS ==================== //
 
 		// SEND ERROR
@@ -178,13 +190,19 @@ io.on('connection', function(socket){
 		function updateLobbies() {
 			io.emit('getLobbiesCallback', lobbies);
 		}
+
+		// UPDATE MEMBERS
+		function updateMembers(id) {
+			io.in(id).emit('getMembersCallback', lobbies);
+		}
 });
 
 // LOBBY OBJECT
 class Lobby {
     constructor(i, n) {
         this.id = i;
-        this.name = n;
+		this.name = n;
+		this.members = [];
     }
 }
 

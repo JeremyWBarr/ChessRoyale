@@ -61,6 +61,7 @@ $(function() {
             getUsername();
         } else if(view == 'LOBBY') {
             getLobby();
+            getMembers();
         }
 
         showView(view);
@@ -72,7 +73,7 @@ $(function() {
         $('.loggedInAs').html('Logged in as: '+username + '! (<a href=# class=switchLogin>logout</a>)');
     });
 
-    //GET LOBBY CALLBACK
+    // GET LOBBY CALLBACK
     socket.on('getLobbyCallback', function(lobby){
         lobbyId     = lobby.id;
         lobbyName   = lobby.name;
@@ -121,6 +122,46 @@ $(function() {
         container.appendChild(table);
     });
 
+    // GET MEMBERS CALLBACK
+    socket.on('getMembersCallback', function(memberlist){
+        console.log(memberlist);
+        
+        // CLEAR OLD LOBBIES TABLE
+        var oldTable = document.getElementsByClassName('memberTable');
+        if(oldTable.length > 0)
+            oldTable[0].remove();
+            
+
+        // CREATE DOM ELEMENTS
+        var container               = document.getElementsByClassName('memberTableContainer')[0];
+        var table                   = document.createElement('table');
+        table.className             = 'memberTable';
+        var header                  = document.createElement("th");
+        header.innerHTML            = 'Members:';
+
+        table.appendChild(header);
+
+        // ADD LOBBIES
+        for(var i = 0; i < 4; i++) {
+            var row                 = document.createElement("tr");
+            var cell                = document.createElement("td");
+            
+            var link                = document.createElement("a");
+
+            if(i < memberlist.length) {
+                link.innerHTML          = memberlist[i].name;
+            } else {
+                link.innerHTML          = '';
+            }
+
+            cell.appendChild(link);
+            row.appendChild(cell);
+            table.appendChild(row);
+        }
+
+        container.appendChild(table);
+    });
+
 // ==================== SOCKET OUTBOUND EVENTS ==================== //
 
     // GET USERNAME
@@ -138,6 +179,10 @@ $(function() {
         socket.emit('getLobbies');
     }
 
+    // GET MEMBERS
+    function getMembers() {
+        socket.emit('getMembers', lobbyId);
+    }
 
 // FUNCTIONS
 function showView(v) {
