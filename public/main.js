@@ -76,7 +76,7 @@ $(function() {
         var container               = document.getElementsByClassName('tableContainer')[0];
         var table                   = document.createElement('table');
         table.className             = 'lobbyTable';
-        var header                  = document.createElement("tr");
+        var header                  = document.createElement("th");
         header.innerHTML            = 'Lobby Name';
 
         table.appendChild(header);
