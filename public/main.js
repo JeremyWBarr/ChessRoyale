@@ -8,7 +8,7 @@ socket.emit('getLobbies');
 // ==================== FORM SUBMISSIONS ==================== //
 
 $(function() {
-    
+
     // LOGIN
     $('.login').click(function(e) {
         socket.emit('login', $('#loginUsername').val(), $('#loginPassword').val());
@@ -59,7 +59,7 @@ $(function() {
     // GET USERNAME CALLBACK
     socket.on('getUsernameCallback', function(username){
         user = username;
-        $('.loggedInAs').html(username);
+        $('.loggedInAs').html('Logged in as: '+username);
     });
 
     //GET LOBBY CALLBACK

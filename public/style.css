@@ -3,8 +3,8 @@ html {
     height: 100%;
 }
 
-
 /* ================================= LOGIN AND SIGNUP ================================= */
+
 #loginView, #signupView {
 
     /* Color */
@@ -41,7 +41,7 @@ html {
     text-align: center;
 }
 
-#loginView input[type=button], #signupView input[type=bitton] {
+#loginView input[type=button], #signupView input[type=button] {
     width: 30%;
     height: 40px;
     margin-top: 30px;
@@ -72,8 +72,9 @@ html {
     
     text-align: center;
     padding-top: 100px;
-}
 
+    color:  rgb(186, 237, 255);
+}
 
 /* HOME TABLE */
 #homeView table {
