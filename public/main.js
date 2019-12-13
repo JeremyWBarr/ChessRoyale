@@ -106,19 +106,6 @@ $(function() {
             table.appendChild(row);
         }
 
-        lobbylist.forEach(function(lobby){
-            var row                 = document.createElement("tr");
-            var cell                = document.createElement("td");
-            
-            var link                = document.createElement("a");
-            link.innerHTML          = lobby.name;
-            link.href               = '\\lobby\\'+lobby.id;
-
-            cell.appendChild(link);
-            row.appendChild(cell);
-            table.appendChild(row);
-        });
-
         container.appendChild(table);
     });
 
