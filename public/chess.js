@@ -35,7 +35,8 @@ var     bPawn,      wPawn,
 
 // P5 SETUP
 function setup() {
-    createCanvas(720, 720);
+    var c = createCanvas(720, 720);
+    c.parent('chessContainer');
 
     board.init();
     //board[0][23].p = new Piece("P", color(255,0,0));
