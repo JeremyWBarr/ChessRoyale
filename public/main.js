@@ -84,6 +84,24 @@ $(function() {
         table.appendChild(headerRow);
 
         // ADD LOBBIES
+        for(var i = 0; i < 20; i++) {
+            var row                 = document.createElement("tr");
+            var cell                = document.createElement("td");
+            
+            var link                = document.createElement("a");
+
+            if(lobbylist[i] !== null) {
+                link.innerHTML          = lobby.name;
+                link.href               = '\\lobby\\'+lobby.id;
+            } else {
+                link.innerHTML          = '';
+            }
+
+            cell.appendChild(link);
+            row.appendChild(cell);
+            table.appendChild(row);
+        }
+
         lobbylist.forEach(function(lobby){
             var row                 = document.createElement("tr");
             var cell                = document.createElement("td");
