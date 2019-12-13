@@ -313,7 +313,7 @@ function containsObject(obj, list) {
 // SEND
 function sendBoardState(board) {
     var jsonBoard = JSON.stringify(board);
-    socket.brodcast.to(lobbyId).emit('boardUpdate', jsonBoard);
+    socket.broadcast.to(lobbyId).emit('boardUpdate', jsonBoard);
 }
 
 //RECIEVE
