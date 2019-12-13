@@ -76,12 +76,10 @@ $(function() {
         var container               = document.getElementsByClassName('tableContainer')[0];
         var table                   = document.createElement('table');
         table.className             = 'lobbyTable';
-        var headerRow               = document.createElement("tr");
-        var header                  = document.createElement("th");
+        var header                  = document.createElement("tr");
         headerRow.innerHTML         = 'Lobby Name';
 
-        headerRow.appendChild(header);
-        table.appendChild(headerRow);
+        table.appendChild(header);
 
         // ADD LOBBIES
         for(var i = 0; i < 15; i++) {
