@@ -64,20 +64,20 @@ function Board(w, h, s) {
             this.tiles[x] = row;
         }
         // RED TEAM
-        this.tiles[0][0] = new Piece(wKing,     color(255,0,0),     canvasWidth / 24);
-        this.tiles[1][1] = new Piece(wQueen,    color(255,0,0),     canvasWidth / 24);
-        this.tiles[0][1] = new Piece(wRook,     color(255,0,0),     canvasWidth / 24);
-        this.tiles[1][0] = new Piece(wRook,     color(255,0,0),     canvasWidth / 24);
-        this.tiles[0][2] = new Piece(wKnight,   color(255,0,0),     canvasWidth / 24);
-        this.tiles[2][0] = new Piece(wKnight,   color(255,0,0),     canvasWidth / 24);
-        this.tiles[0][3] = new Piece(wBishop,   color(255,0,0),     canvasWidth / 24);
-        this.tiles[3][0] = new Piece(wBishop,   color(255,0,0),     canvasWidth / 24);
-        this.tiles[4][0] = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
-        this.tiles[3][1] = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
-        this.tiles[2][1] = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
-        this.tiles[1][2] = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
-        this.tiles[1][3] = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
-        this.tiles[0][4] = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[0][0].p = new Piece(wKing,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[1][1].p = new Piece(wQueen,    color(255,0,0),     canvasWidth / 24);
+        this.tiles[0][1].p = new Piece(wRook,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[1][0].p = new Piece(wRook,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[0][2].p = new Piece(wKnight,   color(255,0,0),     canvasWidth / 24);
+        this.tiles[2][0].p = new Piece(wKnight,   color(255,0,0),     canvasWidth / 24);
+        this.tiles[0][3].p = new Piece(wBishop,   color(255,0,0),     canvasWidth / 24);
+        this.tiles[3][0].p = new Piece(wBishop,   color(255,0,0),     canvasWidth / 24);
+        this.tiles[4][0].p = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[3][1].p = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[2][1].p = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[1][2].p = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[1][3].p = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
+        this.tiles[0][4].p = new Piece(wPawn,     color(255,0,0),     canvasWidth / 24);
     }
 
     this.draw = function() {
