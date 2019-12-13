@@ -195,7 +195,7 @@ function Piece(t, c, s) {
                 return [[[-2,1]],[[-1,2]],[[1,2]],[[2,1]],[[2,-1]],[[1,-2]],[[-1,-2]],[[-2,-1]]];
             case wBishop:
                 return [[[-1, -1], [-2, -2], [-3, -3], [-4, -4], [-5, -5], [-6, -6], [-7, -7]],
-                        [[1, -1], [2, -2], [3, 3], [4, -4], [5, -5], [6, -6], [7, -7]],
+                        [[1, -1], [2, -2], [3, -3], [4, -4], [5, -5], [6, -6], [7, -7]],
                         [[-1, 1], [-2, 2], [-3, 3], [-4, 4], [-5, 5], [-6, 6], [-7, 7]],
                         [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]]];
             case wRook:
@@ -205,7 +205,7 @@ function Piece(t, c, s) {
                         [[-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0], [-6, 0], [-7, 0]]];
             case wQueen:
                 return [[[-1, -1], [-2, -2], [-3, -3], [-4, -4], [-5, -5], [-6, -6], [-7, -7]],
-                        [[1, -1], [2, -2], [3, 3], [4, -4], [5, -5], [6, -6], [7, -7]],
+                        [[1, -1], [2, -2], [3, -3], [4, -4], [5, -5], [6, -6], [7, -7]],
                         [[-1, 1], [-2, 2], [-3, 3], [-4, 4], [-5, 5], [-6, 6], [-7, 7]],
                         [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]],
                         [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7]],
@@ -222,26 +222,36 @@ function Piece(t, c, s) {
 function mouseClicked() {
     var xIndex = Math.floor((mouseX + (xoff * zoom))/(canvasWidth/24 * zoom));
     var yIndex = Math.floor((mouseY + (yoff * zoom))/(canvasWidth/24 * zoom));
-    selectedTile = board.tiles[xIndex][yIndex];
+    tempSelectedTile = board.tiles[xIndex][yIndex];
 
-    availableTiles = [];
-    if(selectedTile.p != null) {
-        selectedTile.p.getAvailableMoves().forEach(function(moveset){
-            console.log(moveset);
-            var deadEnd = false;
-            moveset.forEach(function(move) {
-                if( (selectedTile.x + move[0]) >= 0 && (selectedTile.x + move[0]) < board.tiles.length &&
-                    (selectedTile.y + move[1]) >= 0 && (selectedTile.y + move[1]) < board.tiles[0].length && !deadEnd) {
-                        console.log(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
-                        if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p == null) {
-                            availableTiles.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
-                        } else {
-                            // TODO: add enemy piecies
-                            deadEnd = true;
+    if(containsObject(tempSelectedTile, availableTiles)) {
+        // MOVE PIECE
+        tempSelectedTile.p = selectedTile.p;
+        selectedTile.p = null;
+
+    } else {
+        // FIND AVAILABLE TILES
+        selectedTile = tempSelectedTile;
+        availableTiles = [];
+
+        if(selectedTile.p != null) {
+            selectedTile.p.getAvailableMoves().forEach(function(moveset){
+                console.log(moveset);
+                var deadEnd = false;
+                moveset.forEach(function(move) {
+                    if( (selectedTile.x + move[0]) >= 0 && (selectedTile.x + move[0]) < board.tiles.length &&
+                        (selectedTile.y + move[1]) >= 0 && (selectedTile.y + move[1]) < board.tiles[0].length && !deadEnd) {
+                            console.log(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
+                            if(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]].p == null) {
+                                availableTiles.push(board.tiles[selectedTile.x + move[0]][selectedTile.y + move[1]]);
+                            } else {
+                                // TODO: add enemy piecies
+                                deadEnd = true;
+                            }
                         }
-                    }
+                });
             });
-        });
+        }
     }
 }
 
