@@ -57,7 +57,6 @@ $(function() {
             getUsername();
         } else if(view == 'LOBBY') {
             getLobby();
-            getMembers();
         }
 
         showView(view);
@@ -73,6 +72,7 @@ $(function() {
     socket.on('getLobbyCallback', function(lobby){
         lobbyId     = lobby.id;
         lobbyName   = lobby.name;
+        getMembers();
     });
 
     // GET LOBBIES CALLBACK
