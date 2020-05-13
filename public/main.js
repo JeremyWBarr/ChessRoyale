@@ -2,13 +2,17 @@ var socket      = io();
 var user        = '';
 var lobbyId     = '';
 var lobbyName   = '';
+var lobby;
+var partyId     = '';
+var partyCount  = 0;
+var inviteId    = '';
 var userColor   = 0;
 var turn        = 0;
 var list        = [];
 
 var gameStarted = false;
-            
-socket.emit('getLobbies');
+
+socket.emit('getLobby');
 
 // ==================== FORM SUBMISSIONS ==================== //
 
@@ -39,6 +43,29 @@ $(function() {
         socket.emit('createLobby');
     });
 
+    // INVITE PLAYER
+    $('.inviteSubmit').click(function() {
+        socket.emit('sendInvite', user, $('#inviteUser').val(), partyId);
+        var invitePopup = document.getElementById('invitePopup');
+        invitePopup.style.visibility = 'hidden';
+    });
+
+    // ACCEPT INVITE
+    $('.inviteAccept').click(function() {
+        socket.emit('deleteParty', partyId);
+        socket.emit('joinParty', inviteId);
+
+        console.log(partyId+", "+inviteId);
+
+        var invitedPopup = document.getElementById('invitedPopup');
+        invitedPopup.style.visibility = 'hidden';
+    });
+
+    // DECLINE INVITE
+    $('.inviteDecline').click(function() {
+        var invitedPopup = document.getElementById('invitedPopup');
+        invitedPopup.style.visibility = 'hidden';
+    });
 });
 
 // ==================== SOCKET INBOUND EVENTS ==================== //
@@ -61,6 +88,7 @@ $(function() {
     socket.on('changeView', function(view) {
         if(view == 'HOME'){
             getUsername();
+            socket.emit('createParty');
         } else if(view == 'LOBBY') {
             getLobby();
             getTurn();
@@ -76,7 +104,7 @@ $(function() {
     });
 
     // GET LOBBY CALLBACK
-    socket.on('getLobbyCallback', function(lobby){
+    /*socket.on('getLobbyCallback', function(lobby){
         console.log(lobby);
 
         lobbyId     = lobby.id;
@@ -105,52 +133,37 @@ $(function() {
         $('.lobbyName').html("Welcome to " + lobby.name);
 
         updateMembers(lobby.members);
-    });
+    });*/
 
-    // GET LOBBIES CALLBACK
-    socket.on('getLobbiesCallback', function(lobbylist){
-        console.log(lobbylist);
-        
-        // CLEAR OLD LOBBIES TABLE
-        var oldTable = document.getElementsByClassName('lobbyTable');
-        if(oldTable.length > 0)
-            oldTable[0].remove();
-            
+    // GET PARTY CALLBACK
+    socket.on('getPartyCallback', function(party){
+        console.log(party);
 
-        // CREATE DOM ELEMENTS
-        var container               = document.getElementsByClassName('tableContainer')[0];
-        var table                   = document.createElement('table');
-        table.className             = 'lobbyTable';
-        var header                  = document.createElement("th");
-        header.innerHTML            = 'Available Lobbies:';
+        partyId     = party.id;
+        partyCount  = party.members.length;
 
-        table.appendChild(header);
-
-        // ADD LOBBIES
-        for(var i = 0; i < 5; i++) {
-            var row                 = document.createElement("tr");
-            var cell                = document.createElement("td");
-            
-            var link                = document.createElement("a");
-
-            if(i < lobbylist.length) {
-                link.innerHTML          = lobbylist[i].name;
-                link.href               = 'javascript:joinLobby("'+lobbylist[i].id+'")';
-            } else {
-                link.innerHTML          = '';
-            }
-
-            cell.appendChild(link);
-            row.appendChild(cell);
-            table.appendChild(row);
+        // reset
+        for(var i = 1; i < 5; i++) {
+            document.getElementsByClassName('player'+i+'Invite')[0].style.display = "block";
+            document.getElementsByClassName('player'+i)[0].style.display = "none";
         }
 
-        container.appendChild(table);
+        // set
+        party.members.forEach(function(member, i){
+            var slotnum     = i + 1;
+            var slotInvite  = document.getElementsByClassName('player'+slotnum+'Invite')[0];
+            var slot        = document.getElementsByClassName('player'+slotnum)[0];
+
+            slotInvite.style.display    = "none";
+            slot.style.display          = "block";
+
+            slot.getElementsByTagName("span")[0].innerHTML = member.name;
+        });
     });
 
     // GET MEMBERS CALLBACK
     socket.on('getMembersCallback', function(memberlist){
-        updateMembers(memberlist);
+        //updateMembers(memberlist);
     });
 
     // GET TURN CALLBACK
@@ -170,6 +183,26 @@ $(function() {
             case 3:
             $('.playerTurn').css('color', '#FF0');
         }
+    });
+
+    // RECIEVE INVITE
+    socket.on('recieveInvite', function(from, to, id){
+        inviteId = id;
+        console.log("invite from: " + from + ". to: " + to + ". Id: " + id);
+        if(user == to) {
+            var invitedPopup = document.getElementById('invitedPopup');
+            invitedPopup.getElementsByClassName('invitedMessage')[0].innerHTML = 'Invite from ' + from + '!';
+
+            invitedPopup.style.visibility = 'visible';
+        }
+    });
+
+    // JOIN LOBBY
+    socket.on('joinLobby', function(l){
+        console.log(l);
+        joinLobby(l.id);
+        lobby = l;
+        showView("LOBBY");
     });
 
 // ==================== SOCKET OUTBOUND EVENTS ==================== //
@@ -212,7 +245,23 @@ function showView(v) {
     $('#'+view+'View').css('visibility', 'visible');
 }
 
-function updateMembers(memberlist) {
+function invite() {
+    var invitePopup = document.getElementById('invitePopup');
+    invitePopup.style.visibility = 'visible';
+}
+
+function joinQueue(type) {
+    console.log("HERE")
+    if(type == 'SOLO' && partyCount < 2) {
+        // TODO
+    } else if(type == 'DUO' && partyCount < 3) {
+        // TODO
+    } else if(type == 'SQUAD') {
+        socket.emit('joinQueue', partyId, type, 'SMALL');
+    }
+}
+
+/*function updateMembers(memberlist) {
     list = memberlist;
 
     if(memberlist.length == 4) gameStarted = true;
@@ -266,4 +315,4 @@ function updateMembers(memberlist) {
     }
 
     container.appendChild(table);
-}
+}*/

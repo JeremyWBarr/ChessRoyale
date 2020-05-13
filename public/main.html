@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
 
-    <body>
+    <body oncontextmenu="return false;">
         <!-- MESSAGE -->
         <div id='messageBox' style='visibility: hidden;'>
             <h3 id='message'></h3>
@@ -45,33 +45,66 @@
             <input type='button' class='signup' value='Sign up'/>
         </div>
 
+        <div id='invitePopup' style='visibility: hidden;'>
+            Username: <input type='text' id='inviteUser'/><br/>
+            <input type='button' class='inviteSubmit' value='Invite'/>
+        </div>
+
+        <div id='invitedPopup' style='visibility: hidden;'>
+            <h3 class='invitedMessage'></h3><br/>
+            <input type='button' class='inviteAccept' style='background-color: green;' value='Accept'/>
+            <input type='button' class='inviteDecline' style='background-color: maroon;' value='Decline'/>
+        </div>
+
+
         <!-- HOME PAGE -->
         <div id='homeView' class='view' style='visibility: hidden;'>
-            <img src='assets/White_King.png'>
-            <h1>Chess Royale</h1>
 
             <p class='loggedInAs'></p>
 
-            <div class='tableContainer'></div>
-            
-            <input type='button' class='createLobby' value='Create Lobby'/>
+            <img src='assets/White_King.png'>
+            <h1>Chess Royale</h1>
+
+            <div id='inviteButtons'>
+
+                <div class='player1Container'>
+                    <a href='#' onclick="invite();"><div class='player1Invite'><span>+</span></div></a>
+                    <a href='#'><div class='player1' style='color:steelblue'><span></span></div></a>
+                </div>
+                <div class='player2Container'>
+                    <a href='#' onclick="invite();"><div class='player2Invite'><span>+</span></div></a>
+                    <a href='#'><div class='player2' style='color:violet'><span></span></div></a>
+                </div>
+                <div class='player3Container'>
+                    <a href='#' onclick="invite();"><div class='player3Invite'><span>+</span></div></a>
+                    <a href='#'><div class='player3' style='color:orange'><span></span></div></a>
+                </div>
+                <div class='player4Container'>
+                    <a href='#' onclick="invite();"><div class='player4Invite'><span>+</span></div></a>
+                    <a href='#'><div class='player4' style='color:rebeccapurple'><span></span></div></a>
+                </div>
+            </div>
+
+            <div id='mapSizeContainer'>
+                <label for="mapSize">Map size:</label>
+                <select id='mapSize'>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+            </div>
+
+            <div id='playButtons'>
+                <a href='#' onclick="joinQueue('SOLO');"><div class='playSolo'><span>Play Solo!</span></div></a>
+                <a href='#' onclick="joinQueue('DUO');"><div class='playDuo'><span>Play Duos!</span></div></a>
+                <a href='#' onclick="joinQueue('SQUAD');"><div class='playSquad'><span>Play Squads!</span></div></a>
+            </div>
+            </br>
+            <!-- <input type='button' class='createLobby' value='Create Lobby'/> -->
         </div>
 
         <!-- LOBBY PAGE -->
         <div id='lobbyView' class='view' style='visibility: hidden;'>
-
-            <div id='lobbyMenu'>
-                <img src='assets/White_King.png'>
-                <h1>Chess Royale</h1>
-                <p class='loggedInAs'></p>
-
-                <h2 class='lobbyName'></h2>
-
-                <h2 class='playerTurn'></h2>
-
-                <div class='memberTableContainer'></div>
-            </div>
-
 
             <div id='chessContainer'></div>
         </div>
